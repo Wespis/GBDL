@@ -1,18 +1,130 @@
 {
   "teams": [
-    { "id": 1,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "North", "status": "pending" },
-    { "id": 2,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "North", "status": "pending" },
-    { "id": 3,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "South", "status": "pending" },
-    { "id": 4,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "South", "status": "pending" },
-    { "id": 5,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "East",  "status": "pending" },
-    { "id": 6,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "East",  "status": "pending" },
-    { "id": 7,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "AFC", "division": "West",  "status": "pending" },
-    { "id": 8,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "North", "status": "pending" },
-    { "id": 9,  "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "North", "status": "pending" },
-    { "id": 10, "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "South", "status": "pending" },
-    { "id": 11, "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "South", "status": "pending" },
-    { "id": 12, "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "East",  "status": "pending" },
-    { "id": 13, "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "West",  "status": "pending" },
-    { "id": 14, "name": "TBD", "coach": "TBD", "logo": "", "conference": "NFC", "division": "West",  "status": "pending" }
+    {
+      "id": 1,
+      "name": "Hill Country Ro-Yotes",
+      "coach": "Matt Wesp",
+      "logo": "/uploads/rocketcoyotes.png",
+      "conference": "AFC",
+      "division": "South",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "North",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "South",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "South",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "East",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "East",
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "AFC",
+      "division": "West",
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "North",
+      "status": "pending"
+    },
+    {
+      "id": 9,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "North",
+      "status": "pending"
+    },
+    {
+      "id": 10,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "South",
+      "status": "pending"
+    },
+    {
+      "id": 11,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "South",
+      "status": "pending"
+    },
+    {
+      "id": 12,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "East",
+      "status": "pending"
+    },
+    {
+      "id": 13,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "West",
+      "status": "pending"
+    },
+    {
+      "id": 14,
+      "name": "TBD",
+      "coach": "TBD",
+      "logo": "",
+      "conference": "NFC",
+      "division": "West",
+      "status": "pending"
+    }
   ]
 }
