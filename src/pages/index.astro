@@ -1,18 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import s from '../data/settings.json';
 const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Home">
 
+  <!-- ── Announcement Banner (toggle in admin) ────────────────── -->
+  {s.announcement_enabled && s.announcement_text && (
+    <div class="bg-gb-red text-white text-center text-sm font-semibold py-2 px-4">
+      {s.announcement_text}
+    </div>
+  )}
+
   <!-- ── Hero ─────────────────────────────────────────────── -->
   <section class="bg-gb-deeper border-b border-gb-border">
-    <!-- Red accent bar at top -->
     <div class="h-1 bg-gb-red w-full"></div>
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20">
       <div class="max-w-3xl">
-        <p class="label mb-4">Season 1 · Now Forming</p>
+        <p class="label mb-4">{s.season_label}</p>
         <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-2"
             style="font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:-0.01em;">
           Gridiron
@@ -22,14 +28,13 @@ const base = import.meta.env.BASE_URL;
           Bloodlines
         </h1>
         <p class="text-gb-muted text-lg max-w-xl leading-relaxed mb-10">
-          A 14-team competitive dynasty fantasy football league. Two conferences.
-          Six playoff spots. One championship ring.
+          {s.league_tagline}
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="https://sleeper.com/i/m7jkWzwVZPxgg" target="_blank" rel="noopener" class="btn-primary">
+          <a href={s.sleeper_link} target="_blank" rel="noopener" class="btn-primary">
             Open Sleeper
           </a>
-          <a href="https://discord.gg/7KMZCfbe" target="_blank" rel="noopener"
+          <a href={s.discord_link} target="_blank" rel="noopener"
              class="inline-flex items-center justify-center px-6 py-3 border border-[#5865F2]
                     text-[#5865F2] hover:bg-[#5865F2] hover:text-white font-bold uppercase
                     tracking-wider text-sm transition-colors duration-150">
@@ -44,15 +49,10 @@ const base = import.meta.env.BASE_URL;
   <section class="bg-gb-red border-b border-gb-red-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-gb-red-dark">
-        {[
-          { val: '14',  label: 'Teams' },
-          { val: '2',   label: 'Conferences' },
-          { val: '6',   label: 'Playoff Spots' },
-          { val: '$50', label: 'Annual Dues' },
-        ].map(s => (
+        {(s.quick_stats as any[]).map((stat: any) => (
           <div class="py-4 px-6 text-center">
-            <div class="text-3xl font-bold text-white" style="font-family:'Oswald',sans-serif;">{s.val}</div>
-            <div class="text-red-200 text-xs uppercase tracking-widest mt-0.5">{s.label}</div>
+            <div class="text-3xl font-bold text-white" style="font-family:'Oswald',sans-serif;">{stat.val}</div>
+            <div class="text-red-200 text-xs uppercase tracking-widest mt-0.5">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -61,16 +61,11 @@ const base = import.meta.env.BASE_URL;
 
   <!-- ── League Overview ─────────────────────────────────── -->
   <section class="page-content">
-
     <h2 class="section-title">League Overview</h2>
-
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gb-border">
-
       <div class="card bg-gb-card">
         <p class="label mb-3">Structure</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          14-Team Dynasty
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">14-Team Dynasty</h3>
         <ul class="space-y-2 text-gb-muted text-sm">
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> Two 7-team conferences</li>
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> 6 playoff teams advance</li>
@@ -79,12 +74,9 @@ const base = import.meta.env.BASE_URL;
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> Tiebreaker: top 3 PF among tied teams</li>
         </ul>
       </div>
-
       <div class="card bg-gb-card">
         <p class="label mb-3">Dues & Buy-In</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          $50 Per Season
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">$50 Per Season</h3>
         <ul class="space-y-2 text-gb-muted text-sm">
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> Payment required before the draft</li>
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> First season covers two years</li>
@@ -93,34 +85,25 @@ const base = import.meta.env.BASE_URL;
           <li class="flex gap-3"><span class="text-gb-red shrink-0 mt-0.5">—</span> Non-payment: disqualified from prizes & future seasons</li>
         </ul>
       </div>
-
       <div class="card bg-gb-card">
         <p class="label mb-3">Roster</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          Taxi Squad
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">Taxi Squad</h3>
         <p class="text-gb-muted text-sm leading-relaxed">
           Stash developmental players — especially rookies — on your taxi squad before
           activating them to your main roster. Build your dynasty while competing today.
         </p>
       </div>
-
       <div class="card bg-gb-card">
         <p class="label mb-3">Identity</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          Brand Building
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">Brand Building</h3>
         <p class="text-gb-muted text-sm leading-relaxed">
           Every team creates a name and logo before the draft. Commissioner assistance
           available. Your identity carries across every season — build something worth defending.
         </p>
       </div>
-
       <div class="card bg-gb-card hover:border-gb-gold">
         <p class="label mb-3" style="color:#B89A4A;">Championship</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          Bloodline Bowl
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">Bloodline Bowl</h3>
         <p class="text-gb-muted text-sm leading-relaxed mb-4">
           Champions receive a personalized ring. Cash prizes for 2nd and 3rd. Plus
           Offensive, Defensive, Special Teams & League MVP awards each season.
@@ -129,57 +112,39 @@ const base = import.meta.env.BASE_URL;
           View Championship →
         </a>
       </div>
-
       <div class="card bg-gb-card">
         <p class="label mb-3">Community</p>
-        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">
-          Stay Connected
-        </h3>
+        <h3 class="text-white font-bold text-lg mb-4" style="font-family:'Oswald',sans-serif;">Stay Connected</h3>
         <p class="text-gb-muted text-sm leading-relaxed mb-5">
           Sleeper for lineups and trades. Discord for league communication, weekly
           discussions, and trash talk.
         </p>
         <div class="flex gap-3">
-          <a href="https://sleeper.com/i/m7jkWzwVZPxgg" target="_blank" rel="noopener"
+          <a href={s.sleeper_link} target="_blank" rel="noopener"
              class="text-xs font-bold uppercase tracking-wider px-4 py-2 border border-green-700
-                    text-green-500 hover:bg-green-900/30 transition-colors">
-            Sleeper
-          </a>
-          <a href="https://discord.gg/7KMZCfbe" target="_blank" rel="noopener"
+                    text-green-500 hover:bg-green-900/30 transition-colors">Sleeper</a>
+          <a href={s.discord_link} target="_blank" rel="noopener"
              class="text-xs font-bold uppercase tracking-wider px-4 py-2 border border-[#5865F2]/60
-                    text-[#5865F2] hover:bg-[#5865F2]/10 transition-colors">
-            Discord
-          </a>
+                    text-[#5865F2] hover:bg-[#5865F2]/10 transition-colors">Discord</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ── Red accent bar ──────────────────────────────────── -->
   <div class="h-px bg-gb-border max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
 
   <!-- ── Preseason Checklist ─────────────────────────────── -->
   <section class="bg-gb-card border-t border-b border-gb-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <h2 class="section-title mb-10">Preseason Checklist</h2>
-
       <div class="space-y-0 divide-y divide-gb-border">
-        {[
-          { num: '01', title: 'Create Your Team Brand',
-            desc: 'Choose a team name and design a logo before the draft. Contact a commissioner for assistance. Your brand is your dynasty identity — make it count.' },
-          { num: '02', title: 'Pay League Dues',
-            desc: '$50 due before draft day. First-season members pay for two seasons upfront, ensuring long-term commitment to the league.' },
-          { num: '03', title: 'Join Sleeper & Discord',
-            desc: 'Set up your Sleeper account and join the league Discord. All trade discussions, lineup decisions, and league communication happens there.' },
-          { num: '04', title: 'Prepare Your Draft Strategy',
-            desc: 'Study dynasty rankings, positional scarcity, and rookie values. This is a long-game league — your early-round picks define your dynasty for years.' },
-        ].map(task => (
+        {(s.checklist as any[]).map((task: any) => (
           <div class="flex gap-5 sm:gap-8 py-5 sm:py-7 items-start">
             <div class="text-gb-red font-bold text-3xl sm:text-4xl shrink-0 leading-none"
                  style="font-family:'Oswald',sans-serif; opacity:0.5;">{task.num}</div>
             <div>
-              <div class="text-white font-bold text-base mb-2" style="font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.04em;">
+              <div class="text-white font-bold text-base mb-2"
+                   style="font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.04em;">
                 {task.title}
               </div>
               <div class="text-gb-muted text-sm leading-relaxed">{task.desc}</div>
@@ -193,20 +158,16 @@ const base = import.meta.env.BASE_URL;
   <!-- ── Commissioners ───────────────────────────────────── -->
   <section class="page-content">
     <h2 class="section-title">Commissioners</h2>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-gb-border max-w-2xl">
-      {[
-        { initials: 'CH', name: 'Chris Hunt',    phone: '(210)-823-8224', discord: 'chrish57',  email: 'christopherhunt57@gmail.com' },
-        { initials: 'WG', name: 'Walker Girard', phone: '(832)-331-2153', discord: 'cybornee', email: 'walkergirard7@gmail.com' },
-      ].map(c => (
+      {(s.commissioners as any[]).map((c: any) => (
         <div class="bg-gb-card p-8 border-l-4 border-gb-red">
           <div class="text-gb-red font-bold text-4xl mb-4"
                style="font-family:'Oswald',sans-serif;">{c.initials}</div>
           <div class="text-white font-bold text-xl mb-4"
                style="font-family:'Oswald',sans-serif; text-transform:uppercase;">{c.name}</div>
           <div class="space-y-1 text-sm text-gb-muted">
-            <div>{c.phone}</div>
-            <div>Discord: {c.discord}</div>
+            {c.phone && <div>{c.phone}</div>}
+            {c.discord && <div>Discord: {c.discord}</div>}
             <a href={`mailto:${c.email}`} class="text-gb-red hover:underline block">{c.email}</a>
           </div>
         </div>

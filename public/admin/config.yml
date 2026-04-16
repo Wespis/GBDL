@@ -14,6 +14,91 @@ publish_mode: simple
 
 collections:
 
+  # ── Site Settings ─────────────────────────────────────────────────
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - file: "src/data/settings.json"
+        label: "General Settings"
+        name: "general"
+        fields:
+          - { label: "Season Label",    name: "season_label",   widget: "string", hint: "Shown in the hero, e.g. Season 1 · Now Forming" }
+          - { label: "League Tagline",  name: "league_tagline", widget: "text" }
+          - { label: "Sleeper Link",    name: "sleeper_link",   widget: "string" }
+          - { label: "Discord Link",    name: "discord_link",   widget: "string" }
+          - label: "Show Announcement Banner"
+            name: "announcement_enabled"
+            widget: "boolean"
+            default: false
+          - { label: "Announcement Text", name: "announcement_text", widget: "text", required: false, hint: "Shown as a red banner at the top of every page when enabled" }
+          - label: "Quick Stats Bar"
+            name: "quick_stats"
+            widget: "list"
+            summary: "{{fields.val}} — {{fields.label}}"
+            fields:
+              - { label: "Value",  name: "val",   widget: "string", hint: "e.g. 14 or $50" }
+              - { label: "Label",  name: "label", widget: "string", hint: "e.g. Teams or Annual Dues" }
+          - label: "Commissioners"
+            name: "commissioners"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Initials", name: "initials", widget: "string", hint: "2-3 letters shown large" }
+              - { label: "Name",     name: "name",     widget: "string" }
+              - { label: "Phone",    name: "phone",    widget: "string", required: false }
+              - { label: "Discord",  name: "discord",  widget: "string", required: false }
+              - { label: "Email",    name: "email",    widget: "string" }
+          - label: "Preseason Checklist"
+            name: "checklist"
+            widget: "list"
+            summary: "{{fields.num}} — {{fields.title}}"
+            fields:
+              - { label: "Step Number", name: "num",   widget: "string", hint: "e.g. 01" }
+              - { label: "Title",       name: "title", widget: "string" }
+              - { label: "Description", name: "desc",  widget: "text" }
+
+  # ── Hall of Fame ───────────────────────────────────────────────────
+  - name: "hof"
+    label: "Hall of Fame"
+    files:
+      - file: "src/data/hof.json"
+        label: "Hall of Fame Data"
+        name: "hof"
+        fields:
+          - label: "HOF Inductees"
+            name: "inductees"
+            widget: "list"
+            required: false
+            summary: "{{fields.name}} ({{fields.year}})"
+            fields:
+              - { label: "Name",        name: "name",  widget: "string" }
+              - { label: "Induction Year", name: "year", widget: "string", hint: "e.g. 2028" }
+              - { label: "Team",        name: "team",  widget: "string", required: false }
+              - { label: "Note",        name: "note",  widget: "text",   required: false, hint: "Achievement summary" }
+              - { label: "Photo",       name: "photo", widget: "image",  required: false }
+          - label: "Rivalries"
+            name: "rivalries"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Rivalry Name", name: "name",  widget: "string" }
+              - { label: "Teams",        name: "teams", widget: "string", hint: "e.g. Walker vs. Chris" }
+              - { label: "Description",  name: "desc",  widget: "text" }
+          - label: "Record Categories"
+            name: "records"
+            widget: "list"
+            summary: "{{fields.category}}"
+            fields:
+              - { label: "Category Name", name: "category", widget: "string" }
+              - label: "Records"
+                name: "entries"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Record",  name: "label",  widget: "string" }
+                  - { label: "Holder",  name: "holder", widget: "string", default: "—", hint: "Team or coach name" }
+                  - { label: "Value",   name: "value",  widget: "string", default: "—", hint: "e.g. 284.5 pts" }
+
   # ── Teams ─────────────────────────────────────────────────────────
   - name: "teams"
     label: "Teams"

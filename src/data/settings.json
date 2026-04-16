@@ -1,0 +1,52 @@
+{
+  "season_label": "Season 1 · Now Forming",
+  "league_tagline": "A 14-team competitive dynasty fantasy football league. Two conferences. Six playoff spots. One championship ring.",
+  "sleeper_link": "https://sleeper.com/i/m7jkWzwVZPxgg",
+  "discord_link": "https://discord.gg/7KMZCfbe",
+  "announcement_enabled": false,
+  "announcement_text": "",
+  "quick_stats": [
+    { "val": "14",  "label": "Teams" },
+    { "val": "2",   "label": "Conferences" },
+    { "val": "6",   "label": "Playoff Spots" },
+    { "val": "$50", "label": "Annual Dues" }
+  ],
+  "commissioners": [
+    {
+      "initials": "CH",
+      "name": "Chris Hunt",
+      "phone": "(210)-823-8224",
+      "discord": "chrish57",
+      "email": "christopherhunt57@gmail.com"
+    },
+    {
+      "initials": "WG",
+      "name": "Walker Girard",
+      "phone": "(832)-331-2153",
+      "discord": "cybornee",
+      "email": "walkergirard7@gmail.com"
+    }
+  ],
+  "checklist": [
+    {
+      "num": "01",
+      "title": "Create Your Team Brand",
+      "desc": "Choose a team name and design a logo before the draft. Contact a commissioner for assistance. Your brand is your dynasty identity — make it count."
+    },
+    {
+      "num": "02",
+      "title": "Pay League Dues",
+      "desc": "$50 due before draft day. First-season members pay for two seasons upfront, ensuring long-term commitment to the league."
+    },
+    {
+      "num": "03",
+      "title": "Join Sleeper & Discord",
+      "desc": "Set up your Sleeper account and join the league Discord. All trade discussions, lineup decisions, and league communication happens there."
+    },
+    {
+      "num": "04",
+      "title": "Prepare Your Draft Strategy",
+      "desc": "Study dynasty rankings, positional scarcity, and rookie values. This is a long-game league — your early-round picks define your dynasty for years."
+    }
+  ]
+}

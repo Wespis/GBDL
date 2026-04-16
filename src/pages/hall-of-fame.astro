@@ -1,59 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import hofData from '../data/hof.json';
 
-const rivalries = [
-  { name: 'Clash of the Commish', teams: 'Walker vs. Chris',    desc: 'The commissioners go head-to-head. Commissioner pride on the line every matchup.' },
-  { name: 'Westwood Shootout',    teams: 'Parker vs. August',   desc: 'A high-scoring clash between two offensive-minded dynasties.' },
-  { name: 'Unc Bowl',             teams: 'Webber vs. Matt',     desc: 'Family ties meet dynasty competition in this storied rivalry.' },
-  { name: 'Rage Bait Rivalry',    teams: 'Jackson vs. Kobe',    desc: 'Guaranteed to spark debate in the Discord every time these two meet.' },
-  { name: 'Generations Bowl',     teams: 'Austin vs. Sam',      desc: 'A clash of contrasting dynasty-building philosophies.' },
-  { name: 'Saguaro Showdown',     teams: 'Luke vs. Mac',        desc: 'A rivalry born in the desert. Sun and pride on the line.' },
-  { name: 'H-Town Throwdown',     teams: 'Trevor vs. Ethan',    desc: 'Houston-based coaches battle for city supremacy.' },
-];
-
-const recordCategories = [
-  {
-    title: 'Offensive Records',
-    records: [
-      { label: 'Most Offensive Points In A Game (Team)',   holder: '—', value: '—' },
-      { label: 'Most Offensive Points In A Season (Team)', holder: '—', value: '—' },
-      { label: 'Best WR Game',                             holder: '—', value: '—' },
-      { label: 'Best TE Game',                             holder: '—', value: '—' },
-      { label: 'Best RB Game',                             holder: '—', value: '—' },
-      { label: 'Best QB Game',                             holder: '—', value: '—' },
-    ],
-  },
-  {
-    title: 'Defensive Records',
-    records: [
-      { label: 'Most Defensive Points In A Game (Team)',   holder: '—', value: '—' },
-      { label: 'Most Defensive Points In A Season (Team)', holder: '—', value: '—' },
-      { label: 'Best IDP Flex Game',                       holder: '—', value: '—' },
-    ],
-  },
-  {
-    title: 'Special Teams Records',
-    records: [
-      { label: 'Best Kicker Game',                          holder: '—', value: '—' },
-      { label: 'Best Kicker Season',                        holder: '—', value: '—' },
-      { label: 'Most Consecutive Weeks On A Team (Kicker)', holder: '—', value: '—' },
-    ],
-  },
-  {
-    title: 'Coaching Records',
-    records: [
-      { label: 'Most Points In A Week (Coach)',          holder: '—', value: '—' },
-      { label: 'Most Points In A Season (Coach)',        holder: '—', value: '—' },
-      { label: 'Most Games Won In A Season (Coach)',     holder: '—', value: '—' },
-      { label: 'Most Games Lost In A Season (Coach)',    holder: '—', value: '—' },
-      { label: 'Most Points In Postseason (Coach)',      holder: '—', value: '—' },
-      { label: 'Most Bloodline Bowl Championships',      holder: '—', value: '—' },
-      { label: 'Most Regular Season Wins',               holder: '—', value: '—' },
-      { label: 'Most Post-Season Wins',                  holder: '—', value: '—' },
-      { label: 'Most MVP Awards',                        holder: '—', value: '—' },
-    ],
-  },
-];
+const { inductees, rivalries, records } = hofData as any;
 ---
 
 <Layout title="Hall of Fame">
@@ -75,21 +24,21 @@ const recordCategories = [
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-      {recordCategories.map(cat => (
+      {records.map((cat: any) => (
         <div class="card">
           <h3 class="text-white font-bold text-lg font-display uppercase mb-4 pb-3 border-b border-gb-border">
-            {cat.title}
+            {cat.category}
           </h3>
           <div class="space-y-3">
-            {cat.records.map(rec => (
+            {cat.entries.map((rec: any) => (
               <div class="flex justify-between items-start gap-4 py-2 border-b border-gb-border last:border-0">
                 <div>
                   <div class="text-gray-300 text-sm">{rec.label}</div>
-                  <div class="text-gray-500 text-xs mt-0.5">{rec.holder === '—' ? 'Record holder TBD' : rec.holder}</div>
+                  <div class="text-gray-500 text-xs mt-0.5">
+                    {rec.holder === '—' ? 'Record holder TBD' : rec.holder}
+                  </div>
                 </div>
-                <div class="text-gb-gold font-bold font-display text-lg shrink-0">
-                  {rec.value}
-                </div>
+                <div class="text-gb-gold font-bold font-display text-lg shrink-0">{rec.value}</div>
               </div>
             ))}
           </div>
@@ -99,9 +48,8 @@ const recordCategories = [
 
     <!-- Rivalries -->
     <h2 class="section-title">League Rivalries</h2>
-
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-      {rivalries.map((r, i) => (
+      {rivalries.map((r: any, i: number) => (
         <div class="card hover:border-gb-gold/30 group">
           <div class="text-gb-gold font-bold text-xs uppercase tracking-widest mb-1 font-display">
             Rivalry #{i + 1}
@@ -115,16 +63,33 @@ const recordCategories = [
       ))}
     </div>
 
-    <!-- Hall of Fame Inductees -->
+    <!-- HOF Inductees -->
     <h2 class="section-title">HOF Inductees</h2>
-
-    <div class="card text-center py-16">
-      <h3 class="text-white font-bold text-xl mb-2 font-display">No Inductees Yet</h3>
-      <p class="text-gray-400 text-sm max-w-sm mx-auto">
-        Hall of Fame inductees will be honored here after seasons of sustained excellence.
-        Build your dynasty and leave your legacy.
-      </p>
-    </div>
+    {inductees.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {inductees.map((person: any) => (
+          <div class="bg-gb-card border border-gb-gold/30 p-6 flex flex-col items-center text-center gap-3">
+            {person.photo && (
+              <img src={person.photo} alt={person.name} class="w-20 h-20 rounded-full object-cover border-2 border-gb-gold/40" />
+            )}
+            <div>
+              <div class="text-gb-gold text-xs font-bold uppercase tracking-widest mb-1">{person.year} Inductee</div>
+              <h3 class="text-white font-bold text-lg font-display uppercase">{person.name}</h3>
+              {person.team && <p class="text-gray-400 text-sm">{person.team}</p>}
+              {person.note && <p class="text-gray-500 text-xs mt-2 leading-relaxed">{person.note}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card text-center py-16">
+        <h3 class="text-white font-bold text-xl mb-2 font-display">No Inductees Yet</h3>
+        <p class="text-gray-400 text-sm max-w-sm mx-auto">
+          Hall of Fame inductees will be honored here after seasons of sustained excellence.
+          Build your dynasty and leave your legacy.
+        </p>
+      </div>
+    )}
 
   </section>
 

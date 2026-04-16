@@ -1,0 +1,55 @@
+{
+  "inductees": [],
+  "rivalries": [
+    { "name": "Clash of the Commish", "teams": "Walker vs. Chris",  "desc": "The commissioners go head-to-head. Commissioner pride on the line every matchup." },
+    { "name": "Westwood Shootout",    "teams": "Parker vs. August", "desc": "A high-scoring clash between two offensive-minded dynasties." },
+    { "name": "Unc Bowl",             "teams": "Webber vs. Matt",   "desc": "Family ties meet dynasty competition in this storied rivalry." },
+    { "name": "Rage Bait Rivalry",    "teams": "Jackson vs. Kobe",  "desc": "Guaranteed to spark debate in the Discord every time these two meet." },
+    { "name": "Generations Bowl",     "teams": "Austin vs. Sam",    "desc": "A clash of contrasting dynasty-building philosophies." },
+    { "name": "Saguaro Showdown",     "teams": "Luke vs. Mac",      "desc": "A rivalry born in the desert. Sun and pride on the line." },
+    { "name": "H-Town Throwdown",     "teams": "Trevor vs. Ethan",  "desc": "Houston-based coaches battle for city supremacy." }
+  ],
+  "records": [
+    {
+      "category": "Offensive Records",
+      "entries": [
+        { "label": "Most Offensive Points In A Game (Team)",   "holder": "—", "value": "—" },
+        { "label": "Most Offensive Points In A Season (Team)", "holder": "—", "value": "—" },
+        { "label": "Best WR Game",                             "holder": "—", "value": "—" },
+        { "label": "Best TE Game",                             "holder": "—", "value": "—" },
+        { "label": "Best RB Game",                             "holder": "—", "value": "—" },
+        { "label": "Best QB Game",                             "holder": "—", "value": "—" }
+      ]
+    },
+    {
+      "category": "Defensive Records",
+      "entries": [
+        { "label": "Most Defensive Points In A Game (Team)",   "holder": "—", "value": "—" },
+        { "label": "Most Defensive Points In A Season (Team)", "holder": "—", "value": "—" },
+        { "label": "Best IDP Flex Game",                       "holder": "—", "value": "—" }
+      ]
+    },
+    {
+      "category": "Special Teams Records",
+      "entries": [
+        { "label": "Best Kicker Game",                          "holder": "—", "value": "—" },
+        { "label": "Best Kicker Season",                        "holder": "—", "value": "—" },
+        { "label": "Most Consecutive Weeks On A Team (Kicker)", "holder": "—", "value": "—" }
+      ]
+    },
+    {
+      "category": "Coaching Records",
+      "entries": [
+        { "label": "Most Points In A Week (Coach)",         "holder": "—", "value": "—" },
+        { "label": "Most Points In A Season (Coach)",       "holder": "—", "value": "—" },
+        { "label": "Most Games Won In A Season (Coach)",    "holder": "—", "value": "—" },
+        { "label": "Most Games Lost In A Season (Coach)",   "holder": "—", "value": "—" },
+        { "label": "Most Points In Postseason (Coach)",     "holder": "—", "value": "—" },
+        { "label": "Most Bloodline Bowl Championships",     "holder": "—", "value": "—" },
+        { "label": "Most Regular Season Wins",              "holder": "—", "value": "—" },
+        { "label": "Most Post-Season Wins",                 "holder": "—", "value": "—" },
+        { "label": "Most MVP Awards",                       "holder": "—", "value": "—" }
+      ]
+    }
+  ]
+}
