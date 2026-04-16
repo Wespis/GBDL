@@ -10,10 +10,41 @@
     background-color: #0D1117;
     color: #E6EDF3;
     font-family: 'Inter', system-ui, sans-serif;
+    cursor: none !important;
+  }
+  *, a, button, [role="button"], input, select, textarea, label {
+    cursor: none !important;
   }
   *:focus-visible {
     outline: 2px solid #D50A0A;
     outline-offset: 2px;
+  }
+
+  /* Custom pixel football cursor */
+  #gb-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s ease;
+    font-size: 18px;
+    line-height: 1;
+    filter: drop-shadow(0 0 4px rgba(213,10,10,0.7));
+  }
+  .gb-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(213, 10, 10, 0.5);
+    animation: gb-trail-fade 0.4s ease forwards;
+  }
+  @keyframes gb-trail-fade {
+    from { opacity: 0.6; width: 8px; height: 8px; margin: -4px; }
+    to   { opacity: 0;   width: 2px; height: 2px; margin: -1px; }
   }
 }
 
