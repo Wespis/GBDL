@@ -57,8 +57,8 @@ function isActive(href: string) {
       </nav>
 
       <!-- Commissioner login (desktop) -->
-      <button
-        id="admin-btn"
+      <a
+        href="/admin/"
         class="hidden xl:flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-gb-muted hover:text-white border border-gb-border hover:border-gray-500 px-3 py-1.5 transition-colors shrink-0"
         title="Commissioner login"
       >
@@ -66,7 +66,7 @@ function isActive(href: string) {
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
         </svg>
         Commissioner
-      </button>
+      </a>
 
       <!-- Mobile toggle -->
       <button
@@ -102,15 +102,15 @@ function isActive(href: string) {
       ))}
     </div>
     <div class="max-w-7xl mx-auto px-4 py-3 border-t border-gb-border">
-      <button
-        id="admin-btn-mobile"
+      <a
+        href="/admin/"
         class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-gb-muted hover:text-white transition-colors"
       >
         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
         </svg>
         Commissioner Login
-      </button>
+      </a>
     </div>
   </div>
 </header>
@@ -126,18 +126,4 @@ function isActive(href: string) {
     iconOpen?.classList.toggle('hidden', !hidden);
     iconClose?.classList.toggle('hidden', !!hidden);
   });
-
-  function handleAdminClick() {
-    const identity = (window as any).netlifyIdentity;
-    if (!identity) { window.location.href = '/admin/'; return; }
-    const user = identity.currentUser();
-    if (user) {
-      window.location.href = '/admin/';
-    } else {
-      identity.open();
-    }
-  }
-
-  document.getElementById('admin-btn')?.addEventListener('click', handleAdminClick);
-  document.getElementById('admin-btn-mobile')?.addEventListener('click', handleAdminClick);
 </script>
