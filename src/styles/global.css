@@ -65,12 +65,12 @@
 
   /* Page hero */
   .page-hero {
-    @apply bg-gb-deeper border-b border-gb-border py-14 px-4;
+    @apply bg-gb-deeper border-b border-gb-border py-10 sm:py-14 px-4;
   }
 
   /* Page content wrapper */
   .page-content {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14;
   }
 
   /* Deprecated — kept for backward compat but no-op */
