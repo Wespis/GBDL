@@ -64,8 +64,10 @@ const {
           }
           lastX = x; lastY = y;
 
-          // Position via transform (GPU-accelerated); offset by half element size (12px)
-          cursor!.style.transform = `translate(${x - 12}px, ${y - 12}px) rotate(${angle}deg)`;
+          // Position with left/top; transform handles centering + rotation
+          cursor!.style.left = x + 'px';
+          cursor!.style.top  = y + 'px';
+          cursor!.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
 
           // Wind trail particle
           const dot = document.createElement('div');

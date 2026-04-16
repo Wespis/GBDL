@@ -25,26 +25,33 @@
     position: fixed;
     pointer-events: none;
     z-index: 99999;
-    top: 0; left: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    opacity: 0;
     transform: translate(-50%, -50%);
-    transition: transform 0.05s ease;
-    font-size: 18px;
-    line-height: 1;
-    filter: drop-shadow(0 0 4px rgba(213,10,10,0.7));
+    filter: drop-shadow(0 0 5px rgba(213,10,10,0.8));
+  }
+  #gb-cursor.active {
+    opacity: 1;
   }
   .gb-trail {
     position: fixed;
     pointer-events: none;
     z-index: 99998;
-    top: 0; left: 0;
-    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    margin-top: -4px;
     border-radius: 50%;
-    background: rgba(213, 10, 10, 0.5);
-    animation: gb-trail-fade 0.4s ease forwards;
+    background: rgba(213, 10, 10, 0.6);
+    animation: gb-trail-fade 0.5s ease forwards;
   }
   @keyframes gb-trail-fade {
-    from { opacity: 0.6; width: 8px; height: 8px; margin: -4px; }
-    to   { opacity: 0;   width: 2px; height: 2px; margin: -1px; }
+    0%   { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(0.1); }
   }
 }
 
