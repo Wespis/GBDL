@@ -34,15 +34,11 @@ const {
       <slot />
     </main>
     <Footer />
-    <!-- Redirect to /admin/ after CMS login -->
+    <!-- Redirect to /admin/ after CMS login or invite acceptance -->
     <script>
       if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', (user: any) => {
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
-          }
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/';
         });
       }
     </script>
