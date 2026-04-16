@@ -49,20 +49,23 @@ const {
       // Custom cursor — only on non-touch devices
       if (window.matchMedia('(pointer: fine)').matches) {
         const cursor = document.getElementById('gb-cursor');
-        let lastX = 0, lastY = 0;
+        let lastX = 0, lastY = 0, angle = 0;
 
         document.addEventListener('mousemove', (e) => {
           const x = e.clientX, y = e.clientY;
-          cursor!.style.left = x + 'px';
-          cursor!.style.top  = y + 'px';
+
+          // Show on first move
+          cursor!.classList.add('active');
 
           // Rotate football to face direction of travel
           const dx = x - lastX, dy = y - lastY;
           if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
-            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-            cursor!.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+            angle = Math.atan2(dy, dx) * (180 / Math.PI);
           }
           lastX = x; lastY = y;
+
+          // Position via transform (GPU-accelerated); offset by half element size (12px)
+          cursor!.style.transform = `translate(${x - 12}px, ${y - 12}px) rotate(${angle}deg)`;
 
           // Wind trail particle
           const dot = document.createElement('div');
