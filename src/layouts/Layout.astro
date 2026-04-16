@@ -35,47 +35,11 @@ const {
     </main>
     <Footer />
 
-    <!-- Pixel football cursor -->
-    <div id="gb-cursor">🏈</div>
-
     <!-- Redirect to /admin/ after CMS login or invite acceptance -->
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on('login', () => {
           document.location.href = '/admin/';
-        });
-      }
-
-      // Custom cursor — only on non-touch devices
-      if (window.matchMedia('(pointer: fine)').matches) {
-        const cursor = document.getElementById('gb-cursor');
-        let lastX = 0, lastY = 0, angle = 0;
-
-        document.addEventListener('mousemove', (e) => {
-          const x = e.clientX, y = e.clientY;
-
-          // Show on first move
-          cursor!.classList.add('active');
-
-          // Rotate football to face direction of travel
-          const dx = x - lastX, dy = y - lastY;
-          if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
-            angle = Math.atan2(dy, dx) * (180 / Math.PI);
-          }
-          lastX = x; lastY = y;
-
-          // Position with left/top; transform handles centering + rotation
-          cursor!.style.left = x + 'px';
-          cursor!.style.top  = y + 'px';
-          cursor!.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-
-          // Wind trail particle
-          const dot = document.createElement('div');
-          dot.className = 'gb-trail';
-          dot.style.left = x + 'px';
-          dot.style.top  = y + 'px';
-          document.body.appendChild(dot);
-          setTimeout(() => dot.remove(), 400);
         });
       }
     </script>
