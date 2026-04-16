@@ -1,36 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import sponsorsData from '../data/sponsors.json';
 const base = import.meta.env.BASE_URL;
 
-const sponsors = [
-  {
-    name: "Bubba's Taphouse",
-    tier: 'Primary Sponsor',
-    description: "Gridiron Bloodlines' proud primary sponsor. Bubba's Taphouse is the home of great drinks and great times — the perfect place to watch games and celebrate dynasty wins.",
-    link: 'https://instagram.com',
-    linkLabel: 'Follow on Instagram',
-    icon: '🍺',
-    color: 'border-gb-gold/40 hover:border-gb-gold',
-  },
-  {
-    name: 'Texas A&M Alumni',
-    tier: 'Community Sponsor',
-    description: "Proud home to multiple Texas A&M alumni coaches in the league. Gig 'Em! The Aggie network runs deep in Gridiron Bloodlines.",
-    link: `${base}founding-coaches`,
-    linkLabel: 'Meet the Alumni Coaches',
-    icon: '🎓',
-    color: 'border-gb-border hover:border-gb-red',
-  },
-  {
-    name: 'GB.tv',
-    tier: 'Media Partner',
-    description: 'The official media arm of Gridiron Bloodlines. Season trailers, weekly updates, league highlights, and more. Subscribe to the channel and stay in the loop.',
-    link: `${base}gb-tv`,
-    linkLabel: 'Watch GB.tv',
-    icon: '📺',
-    color: 'border-gb-border hover:border-gb-red',
-  },
-];
+const sponsors = sponsorsData.sponsors;
+
+function tierBorder(tier: string): string {
+  if (tier === 'Primary Sponsor') return 'border-gb-gold/40 hover:border-gb-gold';
+  return 'border-gb-border hover:border-gb-red';
+}
 ---
 
 <Layout title="Sponsors">
@@ -49,9 +27,8 @@ const sponsors = [
     <div class="divider-red"></div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      {sponsors.map(s => (
-        <div class={`card flex flex-col border-2 ${s.color} transition-colors duration-200`}>
-          <div class="text-5xl mb-4">{s.icon}</div>
+      {sponsors.map((s: any) => (
+        <div class={`card flex flex-col border-2 ${tierBorder(s.tier)} transition-colors duration-200`}>
           <div class="badge bg-gb-red/20 border border-gb-red/30 text-gb-red text-[10px] mb-3 self-start">
             {s.tier}
           </div>

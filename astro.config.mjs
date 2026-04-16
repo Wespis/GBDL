@@ -7,6 +7,6 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   output: 'static',
-  site: 'https://Wespis.github.io',
-  base: '/GBDL/',
+  site: 'https://gridiron-bloodlines.netlify.app',
+  base: '/',
 });

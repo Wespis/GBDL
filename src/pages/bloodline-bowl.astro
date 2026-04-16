@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import championsData from '../data/champions.json';
 
-// Update with champions after each season
-const champions: { season: string; champion: string; coach: string; opponent: string; score: string }[] = [];
+const champions = championsData.champions;
 ---
 
 <Layout title="Bloodline Bowl">
@@ -117,7 +117,7 @@ const champions: { season: string; champion: string; coach: string; opponent: st
             </tr>
           </thead>
           <tbody>
-            {champions.map(row => (
+            {champions.map((row: any) => (
               <tr class="border-t border-gb-border hover:bg-gb-card-hover/50 transition-colors">
                 <td class="px-4 py-3 text-gb-gold font-bold font-display">{row.season}</td>
                 <td class="px-4 py-3 text-white font-semibold">{row.champion}</td>

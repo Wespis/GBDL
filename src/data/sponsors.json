@@ -1,0 +1,25 @@
+{
+  "sponsors": [
+    {
+      "name": "Bubba's Taphouse",
+      "tier": "Primary Sponsor",
+      "description": "The official home of post-game analysis. Catch every game, every week.",
+      "link": "https://www.instagram.com/bubbastaph0use/",
+      "linkLabel": "Follow on Instagram"
+    },
+    {
+      "name": "Texas A&M Alumni",
+      "tier": "Community Sponsor",
+      "description": "Gig 'em. Representing the Aggie faithful in dynasty football.",
+      "link": "/founding-coaches/",
+      "linkLabel": "Meet the Coaches"
+    },
+    {
+      "name": "GB.tv",
+      "tier": "Media Partner",
+      "description": "Your source for league highlights, weekly recaps, and dynasty content.",
+      "link": "/gb-tv/",
+      "linkLabel": "Watch GB.tv"
+    }
+  ]
+}

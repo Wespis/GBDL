@@ -1,0 +1,170 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images go in the repo
+media_folder: public/uploads
+# How they're referenced in the site
+public_folder: /uploads
+
+# Only show the CMS to logged-in users
+publish_mode: simple
+
+collections:
+
+  # ── Teams ─────────────────────────────────────────────────────────
+  - name: "teams"
+    label: "Teams"
+    files:
+      - file: "src/data/teams.json"
+        label: "Team Roster"
+        name: "teams"
+        fields:
+          - label: "Teams"
+            name: "teams"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.coach}}"
+            fields:
+              - { label: "Team ID",    name: "id",         widget: "number", value_type: "int" }
+              - { label: "Team Name",  name: "name",        widget: "string" }
+              - { label: "Coach Name", name: "coach",       widget: "string" }
+              - { label: "Team Logo",  name: "logo",        widget: "image",  required: false, hint: "Upload a PNG or JPG logo" }
+              - label: "Conference"
+                name: "conference"
+                widget: "select"
+                options: ["AFC", "NFC"]
+              - label: "Division"
+                name: "division"
+                widget: "select"
+                options: ["North", "South", "East", "West"]
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options: ["active", "pending", "inactive"]
+                default: "pending"
+
+  # ── Bloodline Bowl Champions ───────────────────────────────────────
+  - name: "champions"
+    label: "Champions"
+    files:
+      - file: "src/data/champions.json"
+        label: "Bloodline Bowl Champions"
+        name: "champions"
+        fields:
+          - label: "Champions"
+            name: "champions"
+            widget: "list"
+            summary: "{{fields.season}} — {{fields.champion}}"
+            fields:
+              - { label: "Season",        name: "season",   widget: "string", hint: "e.g. 2026" }
+              - { label: "Champion Team", name: "champion", widget: "string" }
+              - { label: "Coach",         name: "coach",    widget: "string" }
+              - { label: "Opponent",      name: "opponent", widget: "string" }
+              - { label: "Final Score",   name: "score",    widget: "string", hint: "e.g. 142.5 - 118.2" }
+
+  # ── Season Standings ──────────────────────────────────────────────
+  - name: "standings"
+    label: "Season Stats"
+    files:
+      - file: "src/data/standings.json"
+        label: "Standings"
+        name: "standings"
+        fields:
+          - label: "Standings"
+            name: "standings"
+            widget: "list"
+            summary: "{{fields.season}} — #{{fields.rank}} {{fields.team}}"
+            fields:
+              - { label: "Season",          name: "season",  widget: "string", hint: "e.g. 2026" }
+              - { label: "Rank",            name: "rank",    widget: "number", value_type: "int" }
+              - { label: "Team",            name: "team",    widget: "string" }
+              - { label: "Coach",           name: "coach",   widget: "string" }
+              - { label: "Wins",            name: "w",       widget: "number", value_type: "int" }
+              - { label: "Losses",          name: "l",       widget: "number", value_type: "int" }
+              - { label: "Points For",      name: "pf",      widget: "number", value_type: "float" }
+              - { label: "Points Against",  name: "pa",      widget: "number", value_type: "float" }
+              - { label: "Streak",          name: "streak",  widget: "string", hint: "e.g. W3 or L1" }
+
+  # ── Draft Results ─────────────────────────────────────────────────
+  - name: "draft"
+    label: "Draft"
+    files:
+      - file: "src/data/draft.json"
+        label: "Draft Picks"
+        name: "draft"
+        fields:
+          - label: "Picks"
+            name: "picks"
+            widget: "list"
+            summary: "#{{fields.pick}} — {{fields.player}} ({{fields.team}})"
+            fields:
+              - { label: "Overall Pick", name: "pick",      widget: "number", value_type: "int" }
+              - { label: "Team",         name: "team",      widget: "string" }
+              - { label: "Player",       name: "player",    widget: "string" }
+              - { label: "Position",     name: "position",  widget: "string", hint: "e.g. QB, RB, WR, TE, K" }
+              - { label: "NFL Team",     name: "nfl_team",  widget: "string" }
+
+  # ── Weekly Updates ────────────────────────────────────────────────
+  - name: "weekly_updates"
+    label: "Weekly Updates"
+    files:
+      - file: "src/data/weekly-updates.json"
+        label: "Reports"
+        name: "weekly_updates"
+        fields:
+          - label: "Reports"
+            name: "reports"
+            widget: "list"
+            summary: "{{fields.season}} — {{fields.label}}"
+            fields:
+              - { label: "Season",     name: "season",  widget: "string", hint: "e.g. 2026" }
+              - { label: "Week",       name: "week",    widget: "number", value_type: "int" }
+              - { label: "Label",      name: "label",   widget: "string", hint: "e.g. Week 1 or Wildcard" }
+              - { label: "Report Link", name: "link",   widget: "string", required: false, hint: "Paste the Sleeper or Google Docs link" }
+
+  # ── GB.tv Videos ──────────────────────────────────────────────────
+  - name: "videos"
+    label: "GB.tv"
+    files:
+      - file: "src/data/videos.json"
+        label: "Videos"
+        name: "videos"
+        fields:
+          - label: "Videos"
+            name: "videos"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "YouTube Video ID", name: "id",     widget: "string", hint: "The part after ?v= in the YouTube URL" }
+              - { label: "Title",            name: "title",  widget: "string" }
+              - { label: "Season",           name: "season", widget: "string", hint: "e.g. 2026" }
+              - label: "Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Season Trailer", value: "trailer" }
+                  - { label: "Weekly Update",  value: "weekly" }
+                  - { label: "Highlight",      value: "highlight" }
+                  - { label: "Other",          value: "other" }
+
+  # ── Sponsors ──────────────────────────────────────────────────────
+  - name: "sponsors"
+    label: "Sponsors"
+    files:
+      - file: "src/data/sponsors.json"
+        label: "Sponsors"
+        name: "sponsors"
+        fields:
+          - label: "Sponsors"
+            name: "sponsors"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.tier}})"
+            fields:
+              - { label: "Name",        name: "name",        widget: "string" }
+              - label: "Tier"
+                name: "tier"
+                widget: "select"
+                options: ["Primary Sponsor", "Community Sponsor", "Media Partner", "Supporting Sponsor"]
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link URL",    name: "link",        widget: "string" }
+              - { label: "Link Label",  name: "linkLabel",   widget: "string", hint: "Button text, e.g. Visit Us" }

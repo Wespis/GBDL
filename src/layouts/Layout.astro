@@ -25,6 +25,8 @@ const {
     <meta property="og:title" content={`${title} | Gridiron Bloodlines`} />
     <meta property="og:description" content={description} />
     <title>{title} | Gridiron Bloodlines</title>
+    <!-- Netlify Identity widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="bg-gb-dark text-white min-h-screen flex flex-col font-body antialiased">
     <Nav />
@@ -32,5 +34,17 @@ const {
       <slot />
     </main>
     <Footer />
+    <!-- Redirect to /admin/ after CMS login -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user: any) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

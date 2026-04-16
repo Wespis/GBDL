@@ -1,10 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import draftData from '../data/draft.json';
 
-// Startup draft order — update with actual draft picks as they happen
-const draftOrder: string[] = [
-  // Add team names in draft order, e.g. 'Team Name (Coach)'
-];
+const picks = draftData.picks;
 ---
 
 <Layout title="Draft Day">
@@ -97,7 +95,7 @@ const draftOrder: string[] = [
     <!-- Draft Board / Results -->
     <h2 class="section-title">Draft Results</h2>
 
-    {draftOrder.length === 0 ? (
+    {picks.length === 0 ? (
       <div class="card text-center py-16">
         <h3 class="text-white font-bold text-xl mb-2 font-display">Draft Results Coming Soon</h3>
         <p class="text-gray-400 text-sm max-w-sm mx-auto">
@@ -111,19 +109,19 @@ const draftOrder: string[] = [
             <tr class="bg-gb-card-hover text-left">
               <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">#</th>
               <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Team</th>
-              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Pick</th>
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Player</th>
               <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Position</th>
               <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">NFL Team</th>
             </tr>
           </thead>
           <tbody>
-            {draftOrder.map((team, i) => (
+            {picks.map((pick: any) => (
               <tr class="border-t border-gb-border hover:bg-gb-card-hover/50 transition-colors">
-                <td class="px-4 py-3 text-gb-gold font-bold font-display">{i + 1}</td>
-                <td class="px-4 py-3 text-white">{team}</td>
-                <td class="px-4 py-3 text-gray-300">—</td>
-                <td class="px-4 py-3 text-gray-300">—</td>
-                <td class="px-4 py-3 text-gray-300">—</td>
+                <td class="px-4 py-3 text-gb-gold font-bold font-display">{pick.pick}</td>
+                <td class="px-4 py-3 text-white font-semibold">{pick.team}</td>
+                <td class="px-4 py-3 text-white">{pick.player}</td>
+                <td class="px-4 py-3 text-gray-300">{pick.position}</td>
+                <td class="px-4 py-3 text-gray-300">{pick.nfl_team}</td>
               </tr>
             ))}
           </tbody>

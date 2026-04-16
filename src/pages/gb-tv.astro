@@ -1,10 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import videosData from '../data/videos.json';
 
-// Add video IDs here as they are uploaded to YouTube
-// e.g. { id: 'dQw4w9WgXcQ', title: '2026 Season Trailer', season: '2026', type: 'trailer' }
-type Video = { id: string; title: string; season: string; type: 'trailer' | 'weekly' | 'highlight' | 'other' };
-const videos: Video[] = [];
+const videos = videosData.videos;
 ---
 
 <Layout title="GB.tv">
@@ -90,7 +88,7 @@ const videos: Video[] = [];
       </div>
     ) : (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {videos.map(v => (
+        {videos.map((v: any) => (
           <div class="card p-0 overflow-hidden">
             <div class="aspect-video bg-black">
               <iframe
@@ -103,7 +101,7 @@ const videos: Video[] = [];
             </div>
             <div class="p-4">
               <div class="badge bg-gb-red/20 border border-gb-red/30 text-gb-red text-[10px] mb-2">
-                {v.season} · {v.type.charAt(0).toUpperCase() + v.type.slice(1)}
+                {v.season} · {String(v.type).charAt(0).toUpperCase() + String(v.type).slice(1)}
               </div>
               <h3 class="text-white font-semibold">{v.title}</h3>
             </div>
