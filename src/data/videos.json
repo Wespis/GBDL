@@ -1,1 +1,10 @@
-{ "videos": [] }
+{
+  "videos": [
+    {
+      "id": "https://www.youtube.com/watch?v=peBQDr3JMjA",
+      "type": "trailer",
+      "title": "Season Trailer",
+      "season": "1"
+    }
+  ]
+}
