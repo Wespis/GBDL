@@ -8,5 +8,5 @@ export default defineConfig({
   integrations: [tailwind()],
   output: 'static',
   site: 'https://Wespis.github.io',
-  base: '/GBDL',
+  base: '/GBDL/',
 });
