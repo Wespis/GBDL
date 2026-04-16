@@ -4,15 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        'gb-dark':       '#0a0e17',
-        'gb-card':       '#111827',
-        'gb-card-hover': '#1f2937',
-        'gb-border':     '#374151',
-        'gb-red':        '#dc2626',
-        'gb-red-dark':   '#991b1b',
-        'gb-red-deeper': '#7f1d1d',
-        'gb-gold':       '#d97706',
-        'gb-gold-light': '#fbbf24',
+        'gb-dark':       '#0D1117',
+        'gb-deeper':     '#010409',
+        'gb-card':       '#161B22',
+        'gb-card-hover': '#21262D',
+        'gb-border':     '#30363D',
+        'gb-red':        '#D50A0A',
+        'gb-red-dark':   '#AA0808',
+        'gb-red-deeper': '#7A0606',
+        'gb-navy':       '#013369',
+        'gb-gold':       '#B89A4A',
+        'gb-gold-light': '#D4B96A',
+        'gb-text':       '#E6EDF3',
+        'gb-muted':      '#8B949E',
       },
       fontFamily: {
         display: ['Oswald', 'Georgia', 'serif'],

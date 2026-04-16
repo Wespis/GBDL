@@ -5,40 +5,75 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: #0a0e17;
-    color: white;
+    background-color: #0D1117;
+    color: #E6EDF3;
     font-family: 'Inter', system-ui, sans-serif;
+  }
+  *:focus-visible {
+    outline: 2px solid #D50A0A;
+    outline-offset: 2px;
   }
 }
 
 @layer components {
-  .section-title {
-    @apply text-3xl font-bold text-white mb-10 text-center;
-    font-family: 'Oswald', sans-serif;
-  }
+
+  /* Cards */
   .card {
-    @apply bg-gb-card border border-gb-border rounded-xl p-6 transition-colors duration-200 hover:border-gb-red;
+    @apply bg-gb-card p-6 border-l-4 border-transparent hover:border-gb-red transition-colors duration-150;
   }
-  .badge {
-    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
+
+  /* Section titles — left-aligned with red left border (NFL editorial style) */
+  .section-title {
+    @apply text-2xl font-bold text-gb-text mb-8 uppercase tracking-wide;
+    font-family: 'Oswald', sans-serif;
+    border-left: 4px solid #D50A0A;
+    padding-left: 0.875rem;
   }
+
+  /* Small category label */
+  .label {
+    @apply text-gb-red text-xs font-bold uppercase tracking-widest;
+  }
+
+  /* Horizontal rule divider */
+  .divider {
+    @apply border-t border-gb-border my-10;
+  }
+
+  /* Stat display block */
+  .stat-block {
+    @apply border-l-4 border-gb-red pl-4;
+  }
+
+  /* Buttons — sharp corners, NFL style */
   .btn-primary {
-    @apply px-6 py-3 bg-gb-red hover:bg-gb-red-dark text-white font-semibold rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-gb-red hover:bg-gb-red-dark
+           text-white font-bold uppercase tracking-wider text-sm transition-colors duration-150;
   }
   .btn-secondary {
-    @apply px-6 py-3 bg-gb-card hover:bg-gb-card-hover border border-gb-border text-white font-semibold rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gb-border
+           hover:border-gb-text text-gb-muted hover:text-white font-bold uppercase
+           tracking-wider text-sm transition-colors duration-150;
   }
+  .btn-outline-red {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gb-red
+           text-gb-red hover:bg-gb-red hover:text-white font-bold uppercase
+           tracking-wider text-sm transition-colors duration-150;
+  }
+
+  /* Page hero */
   .page-hero {
-    @apply relative bg-gradient-to-b from-gb-red-deeper via-gb-dark to-gb-dark py-16 px-4 text-center;
+    @apply bg-gb-deeper border-b border-gb-border py-14 px-4;
   }
+
+  /* Page content wrapper */
   .page-content {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14;
   }
-  .divider-red {
-    @apply h-1 w-16 bg-gb-red rounded mx-auto mt-4 mb-8;
-  }
+
+  /* Deprecated — kept for backward compat but no-op */
+  .divider-red { @apply hidden; }
+  .badge { @apply label; }
 }
