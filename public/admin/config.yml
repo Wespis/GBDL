@@ -99,6 +99,36 @@ collections:
                   - { label: "Holder",  name: "holder", widget: "string", default: "—", hint: "Team or coach name" }
                   - { label: "Value",   name: "value",  widget: "string", default: "—", hint: "e.g. 284.5 pts" }
 
+  # ── League Structure ──────────────────────────────────────────────
+  - name: "league"
+    label: "League Structure"
+    files:
+      - file: "src/data/league.json"
+        label: "Conferences & Divisions"
+        name: "league"
+        fields:
+          - label: "Conferences"
+            name: "conferences"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Conference Name",  name: "name",  widget: "string", hint: "e.g. AFC — must match what teams use" }
+              - { label: "Display Label",    name: "label", widget: "string", hint: "e.g. AFC Conference" }
+              - label: "Accent Color"
+                name: "color"
+                widget: "select"
+                options:
+                  - { label: "Red",   value: "red" }
+                  - { label: "Blue",  value: "blue" }
+                  - { label: "Gold",  value: "gold" }
+                  - { label: "Green", value: "green" }
+                default: "red"
+              - label: "Divisions"
+                name: "divisions"
+                widget: "list"
+                hint: "Add or remove division names — must match what teams use"
+                field: { label: "Division Name", name: "division", widget: "string" }
+
   # ── Teams ─────────────────────────────────────────────────────────
   - name: "teams"
     label: "Teams"
@@ -118,14 +148,8 @@ collections:
               - { label: "Nickname",          name: "nickname",    widget: "string", required: false, hint: "Short nickname, e.g. Ro-Yotes" }
               - { label: "Head Coach",        name: "coach",       widget: "string" }
               - { label: "Team Logo",         name: "logo",        widget: "image",  required: false }
-              - label: "Conference"
-                name: "conference"
-                widget: "select"
-                options: ["AFC", "NFC"]
-              - label: "Division"
-                name: "division"
-                widget: "select"
-                options: ["North", "South", "East", "West"]
+              - { label: "Conference", name: "conference", widget: "string", hint: "Must match a conference name defined in League Structure (e.g. AFC)" }
+              - { label: "Division",   name: "division",   widget: "string", hint: "Must match a division defined in League Structure (e.g. North)" }
               - label: "Status"
                 name: "status"
                 widget: "select"

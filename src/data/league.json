@@ -1,0 +1,16 @@
+{
+  "conferences": [
+    {
+      "name": "AFC",
+      "label": "AFC Conference",
+      "color": "red",
+      "divisions": ["North", "South", "East", "West"]
+    },
+    {
+      "name": "NFC",
+      "label": "NFC Conference",
+      "color": "blue",
+      "divisions": ["North", "South", "East", "West"]
+    }
+  ]
+}

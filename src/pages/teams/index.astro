@@ -1,111 +1,109 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import teamsData from '../../data/teams.json';
+import leagueData from '../../data/league.json';
 
-const teams = teamsData.teams as any[];
-const base = import.meta.env.BASE_URL;
-const afcTeams = teams.filter(t => t.conference === 'AFC');
-const nfcTeams = teams.filter(t => t.conference === 'NFC');
+const teams  = teamsData.teams as any[];
+const conferences = leagueData.conferences as any[];
+const base   = import.meta.env.BASE_URL;
+
+// Pre-built Tailwind class sets per color token — must be literal so Tailwind keeps them
+const colors: Record<string, { head: string; badge: string; cardHover: string; circleHover: string; btn: string }> = {
+  red: {
+    head:        'text-gb-red',
+    badge:       'bg-gb-red/20 border-gb-red/30 text-gb-red',
+    cardHover:   'hover:border-gb-red',
+    circleHover: 'group-hover:border-gb-red',
+    btn:         'text-gb-red border-gb-red/40 hover:border-gb-red hover:text-white',
+  },
+  blue: {
+    head:        'text-blue-400',
+    badge:       'bg-blue-900/40 border-blue-700/40 text-blue-400',
+    cardHover:   'hover:border-blue-600',
+    circleHover: 'group-hover:border-blue-600',
+    btn:         'text-blue-400 border-blue-700/40 hover:border-blue-400 hover:text-white',
+  },
+  gold: {
+    head:        'text-gb-gold',
+    badge:       'bg-gb-gold/20 border-gb-gold/30 text-gb-gold',
+    cardHover:   'hover:border-gb-gold',
+    circleHover: 'group-hover:border-gb-gold',
+    btn:         'text-gb-gold border-gb-gold/40 hover:border-gb-gold hover:text-white',
+  },
+  green: {
+    head:        'text-green-400',
+    badge:       'bg-green-900/40 border-green-700/40 text-green-400',
+    cardHover:   'hover:border-green-600',
+    circleHover: 'group-hover:border-green-600',
+    btn:         'text-green-400 border-green-700/40 hover:border-green-400 hover:text-white',
+  },
+};
+
+function c(color: string) {
+  return colors[color] ?? colors.red;
+}
 ---
 
 <Layout title="Teams">
 
   <section class="page-hero">
     <div class="relative max-w-3xl mx-auto">
-      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">Season 1 — 14 Franchises</div>
-      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">
-        Teams
-      </h1>
+      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">
+        Season 1 — {teams.length} Franchises
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">Teams</h1>
       <p class="text-gray-300 text-lg">The franchises competing for the Bloodline Bowl.</p>
     </div>
   </section>
 
-  <section class="page-content">
+  <section class="page-content space-y-14">
 
-    <!-- AFC Conference -->
-    <div class="mb-14">
-      <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
-        <span class="text-gb-red">AFC</span> Conference
-      </h2>
-      <div class="h-0.5 w-full bg-gb-border mb-6"></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {afcTeams.map((team: any) => (
-          <div class="bg-gb-card border border-gb-border hover:border-gb-red transition-colors duration-200 flex flex-col items-center text-center p-6 group">
-            <!-- Logo or placeholder -->
-            <div class="w-20 h-20 rounded-full bg-gb-card-hover border-2 border-gb-border group-hover:border-gb-red flex items-center justify-center mb-4 transition-colors duration-200 overflow-hidden">
-              {team.logo
-                ? <img src={team.logo} alt={team.name} class="w-full h-full object-cover" />
-                : <span class="text-gray-600 text-2xl font-bold font-display">{team.id}</span>
-              }
-            </div>
-            <div class="badge bg-gb-red/20 border border-gb-red/30 text-gb-red text-[10px] mb-2">
-              AFC · {team.division}
-            </div>
-            <h3 class="text-white font-bold text-base font-display uppercase leading-tight mb-1">
-              {team.name === 'TBD' ? 'Team TBD' : team.name}
-            </h3>
-            {team.nickname && (
-              <p class="text-gb-gold text-xs font-semibold uppercase tracking-wider mb-1">"{team.nickname}"</p>
-            )}
-            <p class="text-gray-400 text-sm mb-4">
-              {team.coach === 'TBD' ? 'Coach TBD' : `Coach: ${team.coach}`}
-            </p>
-            {team.status === 'active' && team.name !== 'TBD' ? (
-              <a
-                href={`${base}teams/${team.slug}`}
-                class="text-xs font-bold uppercase tracking-wider text-gb-red hover:text-white border border-gb-red/40 hover:border-gb-red px-3 py-1.5 transition-colors"
-              >
-                View Profile →
-              </a>
-            ) : (
-              <span class="text-xs text-gray-600 uppercase tracking-wider">Profile Pending</span>
-            )}
+    {conferences.map((conf: any, i: number) => {
+      const confTeams = teams.filter(t => t.conference === conf.name);
+      const col = c(conf.color);
+      return (
+        <div>
+          <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+            <span class={col.head}>{conf.name}</span> {conf.label.replace(conf.name, '').trim() || 'Conference'}
+          </h2>
+          <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {confTeams.map((team: any) => (
+              <div class={`bg-gb-card border border-gb-border ${col.cardHover} transition-colors duration-200 flex flex-col items-center text-center p-6 group`}>
+                <div class={`w-20 h-20 rounded-full bg-gb-card-hover border-2 border-gb-border ${col.circleHover} flex items-center justify-center mb-4 transition-colors duration-200 overflow-hidden`}>
+                  {team.logo
+                    ? <img src={team.logo} alt={team.name} class="w-full h-full object-cover" />
+                    : <span class="text-gray-600 text-2xl font-bold font-display">{team.id}</span>
+                  }
+                </div>
+                <div class={`badge border text-[10px] mb-2 ${col.badge}`}>
+                  {team.conference} · {team.division}
+                </div>
+                <h3 class="text-white font-bold text-base font-display uppercase leading-tight mb-1">
+                  {team.name === 'TBD' ? 'Team TBD' : team.name}
+                </h3>
+                {team.nickname && (
+                  <p class="text-gb-gold text-xs font-semibold uppercase tracking-wider mb-1">"{team.nickname}"</p>
+                )}
+                <p class="text-gray-400 text-sm mb-4">
+                  {team.coach === 'TBD' ? 'Coach TBD' : `Coach: ${team.coach}`}
+                </p>
+                {team.status === 'active' && team.name !== 'TBD' ? (
+                  <a
+                    href={`${base}teams/${team.slug}`}
+                    class={`text-xs font-bold uppercase tracking-wider border px-3 py-1.5 transition-colors ${col.btn}`}
+                  >
+                    View Profile →
+                  </a>
+                ) : (
+                  <span class="text-xs text-gray-600 uppercase tracking-wider">Profile Pending</span>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- NFC Conference -->
-    <div>
-      <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
-        <span class="text-blue-400">NFC</span> Conference
-      </h2>
-      <div class="h-0.5 w-full bg-gb-border mb-6"></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {nfcTeams.map((team: any) => (
-          <div class="bg-gb-card border border-gb-border hover:border-blue-600 transition-colors duration-200 flex flex-col items-center text-center p-6 group">
-            <div class="w-20 h-20 rounded-full bg-gb-card-hover border-2 border-gb-border group-hover:border-blue-600 flex items-center justify-center mb-4 transition-colors duration-200 overflow-hidden">
-              {team.logo
-                ? <img src={team.logo} alt={team.name} class="w-full h-full object-cover" />
-                : <span class="text-gray-600 text-2xl font-bold font-display">{team.id}</span>
-              }
-            </div>
-            <div class="badge bg-blue-900/40 border border-blue-700/40 text-blue-400 text-[10px] mb-2">
-              NFC · {team.division}
-            </div>
-            <h3 class="text-white font-bold text-base font-display uppercase leading-tight mb-1">
-              {team.name === 'TBD' ? 'Team TBD' : team.name}
-            </h3>
-            {team.nickname && (
-              <p class="text-gb-gold text-xs font-semibold uppercase tracking-wider mb-1">"{team.nickname}"</p>
-            )}
-            <p class="text-gray-400 text-sm mb-4">
-              {team.coach === 'TBD' ? 'Coach TBD' : `Coach: ${team.coach}`}
-            </p>
-            {team.status === 'active' && team.name !== 'TBD' ? (
-              <a
-                href={`${base}teams/${team.slug}`}
-                class="text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-white border border-blue-700/40 hover:border-blue-400 px-3 py-1.5 transition-colors"
-              >
-                View Profile →
-              </a>
-            ) : (
-              <span class="text-xs text-gray-600 uppercase tracking-wider">Profile Pending</span>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      );
+    })}
 
   </section>
 
