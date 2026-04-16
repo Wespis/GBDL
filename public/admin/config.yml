@@ -2,6 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
+logo_url: https://gridironbloodlines.com/favicon.svg
+
 # Where uploaded images go in the repo
 media_folder: public/uploads
 # How they're referenced in the site
@@ -17,18 +19,20 @@ collections:
     label: "Teams"
     files:
       - file: "src/data/teams.json"
-        label: "Team Roster"
+        label: "Team Profiles"
         name: "teams"
         fields:
           - label: "Teams"
             name: "teams"
             widget: "list"
-            summary: "{{fields.name}} — {{fields.coach}}"
+            summary: "{{fields.name}} ({{fields.conference}} · {{fields.division}})"
             fields:
-              - { label: "Team ID",    name: "id",         widget: "number", value_type: "int" }
-              - { label: "Team Name",  name: "name",        widget: "string" }
-              - { label: "Coach Name", name: "coach",       widget: "string" }
-              - { label: "Team Logo",  name: "logo",        widget: "image",  required: false, hint: "Upload a PNG or JPG logo" }
+              - { label: "Team ID (number)",  name: "id",         widget: "number", value_type: "int" }
+              - { label: "URL Slug",          name: "slug",        widget: "string", hint: "URL-friendly ID, e.g. hill-country-rocket-coyotes" }
+              - { label: "Full Team Name",    name: "name",        widget: "string" }
+              - { label: "Nickname",          name: "nickname",    widget: "string", required: false, hint: "Short nickname, e.g. Ro-Yotes" }
+              - { label: "Head Coach",        name: "coach",       widget: "string" }
+              - { label: "Team Logo",         name: "logo",        widget: "image",  required: false }
               - label: "Conference"
                 name: "conference"
                 widget: "select"
@@ -42,6 +46,28 @@ collections:
                 widget: "select"
                 options: ["active", "pending", "inactive"]
                 default: "pending"
+              - { label: "Region",            name: "region",      widget: "string",  required: false, hint: "e.g. Texas Hill Country" }
+              - { label: "Home Stadium",      name: "stadium",     widget: "string",  required: false }
+              - { label: "Founded",           name: "founded",     widget: "string",  required: false, hint: "e.g. 2026" }
+              - { label: "Team Colors",       name: "colors",      widget: "string",  required: false, hint: "e.g. Royal Blue, White, Silver" }
+              - { label: "Owner",             name: "owner",       widget: "string",  required: false }
+              - { label: "Founder",           name: "founder",     widget: "string",  required: false }
+              - { label: "General Manager",   name: "gm",          widget: "string",  required: false }
+              - { label: "Team Motto",        name: "motto",       widget: "string",  required: false }
+              - label: "Sponsors"
+                name: "sponsors"
+                widget: "list"
+                required: false
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Sponsor Name", name: "name", widget: "string" }
+                  - { label: "Sponsor Logo", name: "logo", widget: "image", required: false }
+              - { label: "Primary Brand Mark",  name: "brand_primary",   widget: "image", required: false, hint: "Main logo / mascot image" }
+              - { label: "Monogram",            name: "brand_monogram",  widget: "image", required: false }
+              - { label: "Wordmark",            name: "brand_wordmark",  widget: "image", required: false }
+              - { label: "Uniforms Image",      name: "uniforms_image",  widget: "image", required: false }
+              - { label: "Coaching Staff",      name: "coaching_staff",  widget: "text",  required: false, hint: "List coaches and roles" }
+              - { label: "Active Roster",       name: "roster",          widget: "text",  required: false, hint: "List player names" }
 
   # ── Bloodline Bowl Champions ───────────────────────────────────────
   - name: "champions"

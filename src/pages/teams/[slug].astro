@@ -1,0 +1,213 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import teamsData from '../../data/teams.json';
+
+export function getStaticPaths() {
+  return (teamsData.teams as any[]).map((team: any) => ({
+    params: { slug: team.slug },
+    props: { team },
+  }));
+}
+
+const { team } = Astro.props as { team: any };
+const base = import.meta.env.BASE_URL;
+
+const hasBranding = team.brand_primary || team.brand_monogram || team.brand_wordmark || team.uniforms_image;
+const hasSponsors = team.sponsors && team.sponsors.length > 0;
+const isActive = team.status === 'active' && team.name !== 'TBD';
+
+const confColor = team.conference === 'AFC' ? 'text-gb-red' : 'text-blue-400';
+const confBg    = team.conference === 'AFC' ? 'bg-gb-red/20 border-gb-red/30 text-gb-red' : 'bg-blue-900/40 border-blue-700/40 text-blue-400';
+---
+
+<Layout title={isActive ? team.name : 'Team Profile'}>
+
+  {isActive ? (
+    <>
+      <!-- Hero -->
+      <section class="bg-gb-deeper border-b border-gb-border py-12 px-4">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+          <!-- Logo -->
+          <div class="w-32 h-32 rounded-full bg-gb-card border-2 border-gb-border flex items-center justify-center overflow-hidden shrink-0">
+            {team.logo
+              ? <img src={team.logo} alt={team.name} class="w-full h-full object-cover" />
+              : <span class="text-gray-600 text-4xl font-bold font-display">{team.id}</span>
+            }
+          </div>
+          <!-- Info -->
+          <div class="text-center md:text-left">
+            <div class={`inline-block badge border text-[10px] mb-3 ${confBg}`}>
+              {team.conference} · {team.division}
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white font-display uppercase leading-tight mb-1">
+              {team.name}
+            </h1>
+            {team.nickname && (
+              <p class="text-gb-gold text-lg font-semibold tracking-wide mb-2">"{team.nickname}"</p>
+            )}
+            {team.motto && (
+              <p class="text-gray-400 text-base italic mt-2">"{team.motto}"</p>
+            )}
+            {team.founded && (
+              <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Est. {team.founded}</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section class="page-content">
+        <div class="max-w-5xl mx-auto space-y-14">
+
+          <!-- Two-column: Franchise Overview + Front Office -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Franchise Overview -->
+            <div class="bg-gb-card border border-gb-border p-6">
+              <h2 class="section-title text-xl mb-6">Franchise Overview</h2>
+              <table class="w-full text-sm">
+                <tbody class="divide-y divide-gb-border">
+                  {[
+                    ['Full Name',    team.name],
+                    ['Nickname',     team.nickname],
+                    ['Conference',   team.conference],
+                    ['Division',     team.division],
+                    ['Region',       team.region],
+                    ['Home Stadium', team.stadium],
+                    ['Founded',      team.founded],
+                    ['Team Colors',  team.colors],
+                  ].filter(([, v]) => v).map(([label, value]) => (
+                    <tr>
+                      <td class="py-2.5 pr-4 text-gray-500 uppercase tracking-wider text-[11px] font-semibold w-36 shrink-0">{label}</td>
+                      <td class="py-2.5 text-white">{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Front Office -->
+            <div class="bg-gb-card border border-gb-border p-6">
+              <h2 class="section-title text-xl mb-6">Front Office</h2>
+              <table class="w-full text-sm">
+                <tbody class="divide-y divide-gb-border">
+                  {[
+                    ['Owner',             team.owner],
+                    ['Founder',           team.founder],
+                    ['General Manager',   team.gm],
+                    ['Head Coach',        team.coach],
+                  ].filter(([, v]) => v).map(([label, value]) => (
+                    <tr>
+                      <td class="py-2.5 pr-4 text-gray-500 uppercase tracking-wider text-[11px] font-semibold w-40 shrink-0">{label}</td>
+                      <td class="py-2.5 text-white font-semibold">{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Team Motto -->
+          {team.motto && (
+            <div class="border-l-4 border-gb-gold bg-gb-gold/5 px-8 py-6">
+              <p class="text-gb-gold text-xs uppercase tracking-widest font-bold mb-2">Team Motto</p>
+              <blockquote class="text-white text-2xl md:text-3xl font-bold font-display uppercase">
+                "{team.motto}"
+              </blockquote>
+            </div>
+          )}
+
+          <!-- Visual Identity -->
+          {hasBranding && (
+            <div>
+              <h2 class="section-title mb-6">Visual Identity</h2>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {team.brand_primary && (
+                  <div class="bg-gb-card border border-gb-border p-4 flex flex-col items-center gap-3">
+                    <img src={team.brand_primary} alt="Primary Mark" class="w-full h-28 object-contain" />
+                    <p class="text-gray-500 text-[11px] uppercase tracking-wider">Primary Mark</p>
+                  </div>
+                )}
+                {team.brand_monogram && (
+                  <div class="bg-gb-card border border-gb-border p-4 flex flex-col items-center gap-3">
+                    <img src={team.brand_monogram} alt="Monogram" class="w-full h-28 object-contain" />
+                    <p class="text-gray-500 text-[11px] uppercase tracking-wider">Monogram</p>
+                  </div>
+                )}
+                {team.brand_wordmark && (
+                  <div class="bg-gb-card border border-gb-border p-4 flex flex-col items-center gap-3">
+                    <img src={team.brand_wordmark} alt="Wordmark" class="w-full h-28 object-contain" />
+                    <p class="text-gray-500 text-[11px] uppercase tracking-wider">Wordmark</p>
+                  </div>
+                )}
+                {team.uniforms_image && (
+                  <div class="bg-gb-card border border-gb-border p-4 flex flex-col items-center gap-3">
+                    <img src={team.uniforms_image} alt="Uniforms" class="w-full h-28 object-contain" />
+                    <p class="text-gray-500 text-[11px] uppercase tracking-wider">Uniforms</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          <!-- Official Sponsors -->
+          {hasSponsors && (
+            <div>
+              <h2 class="section-title mb-6">Official Sponsors</h2>
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {(team.sponsors as any[]).map((s: any) => (
+                  <div class="bg-gb-card border border-gb-border p-4 flex flex-col items-center gap-2 text-center">
+                    {s.logo && (
+                      <img src={s.logo} alt={s.name} class="h-12 object-contain" />
+                    )}
+                    <p class="text-white text-sm font-semibold">{s.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Coaching Staff -->
+          {team.coaching_staff && (
+            <div>
+              <h2 class="section-title mb-4">Coaching Staff</h2>
+              <div class="bg-gb-card border border-gb-border p-6">
+                <p class="text-gray-300 whitespace-pre-line leading-relaxed">{team.coaching_staff}</p>
+              </div>
+            </div>
+          )}
+
+          <!-- Active Roster -->
+          {team.roster && (
+            <div>
+              <h2 class="section-title mb-4">Active Roster</h2>
+              <div class="bg-gb-card border border-gb-border p-6">
+                <p class="text-gray-300 whitespace-pre-line leading-relaxed">{team.roster}</p>
+              </div>
+            </div>
+          )}
+
+          <!-- Back link -->
+          <div>
+            <a href={`${base}teams`} class="text-gray-500 hover:text-white text-sm transition-colors">
+              ← Back to All Teams
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </>
+  ) : (
+    <!-- Profile not yet set up -->
+    <section class="page-hero">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-block badge bg-gb-gold/20 border border-gb-gold/30 text-gb-gold mb-4">Profile Pending</div>
+        <h1 class="text-5xl font-bold text-white font-display uppercase mb-3">Team {team.id}</h1>
+        <p class="text-gray-400">This team's profile hasn't been set up yet. Check back after the draft.</p>
+        <a href={`${base}teams`} class="inline-block mt-6 text-gb-red hover:text-white text-sm transition-colors">
+          ← Back to All Teams
+        </a>
+      </div>
+    </section>
+  )}
+
+</Layout>
