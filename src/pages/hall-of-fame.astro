@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const rivalries = [
+  { name: 'Clash of the Commish', teams: 'Walker vs. Chris',           desc: 'The commissioners go head-to-head. Commissioner pride on the line every matchup.' },
+  { name: 'Westwood Shootout',    teams: 'TBD vs. TBD',                desc: 'A high-scoring clash between two offensive-minded dynasties.' },
+  { name: 'Unc Bowl',             teams: 'TBD vs. TBD',                desc: 'Family ties meet dynasty competition in this storied rivalry.' },
+  { name: 'Rage Bait Rivalry',    teams: 'TBD vs. TBD',                desc: 'Guaranteed to spark debate in the Discord every time these two meet.' },
+  { name: 'Generations Bowl',     teams: 'TBD vs. TBD',                desc: 'A clash of contrasting dynasty-building philosophies.' },
+  { name: 'Saguaro Showdown',     teams: 'TBD vs. TBD',                desc: 'A rivalry born in the desert. Sun and pride on the line.' },
+  { name: 'H-Town Throwdown',     teams: 'TBD vs. TBD',                desc: 'Houston-based coaches battle for city supremacy.' },
+];
+
+const recordCategories = [
+  {
+    title: 'Offensive Records',
+    icon: '⚔️',
+    records: [
+      { label: 'Most Offensive Points In A Game (Team)',   holder: '—', value: '—' },
+      { label: 'Most Offensive Points In A Season (Team)', holder: '—', value: '—' },
+      { label: 'Best WR Game',                             holder: '—', value: '—' },
+      { label: 'Best TE Game',                             holder: '—', value: '—' },
+      { label: 'Best RB Game',                             holder: '—', value: '—' },
+      { label: 'Best QB Game',                             holder: '—', value: '—' },
+    ],
+  },
+  {
+    title: 'Defensive Records',
+    icon: '🛡️',
+    records: [
+      { label: 'Most Defensive Points In A Game (Team)',   holder: '—', value: '—' },
+      { label: 'Most Defensive Points In A Season (Team)', holder: '—', value: '—' },
+      { label: 'Best IDP Flex Game',                       holder: '—', value: '—' },
+    ],
+  },
+  {
+    title: 'Special Teams Records',
+    icon: '🦵',
+    records: [
+      { label: 'Best Kicker Game',                             holder: '—', value: '—' },
+      { label: 'Best Kicker Season',                           holder: '—', value: '—' },
+      { label: 'Most Consecutive Weeks On A Team (Kicker)',    holder: '—', value: '—' },
+    ],
+  },
+  {
+    title: 'Coaching Records',
+    icon: '📋',
+    records: [
+      { label: 'Most Points In A Week (Coach)',         holder: '—', value: '—' },
+      { label: 'Most Points In A Season (Coach)',       holder: '—', value: '—' },
+      { label: 'Most Bloodline Bowl Championships',     holder: '—', value: '—' },
+      { label: 'Most Regular Season Wins',              holder: '—', value: '—' },
+      { label: 'Most Post-Season Wins',                 holder: '—', value: '—' },
+      { label: 'Most MVP Awards',                       holder: '—', value: '—' },
+    ],
+  },
+];
+---
+
+<Layout title="Hall of Fame">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-gold/20 border border-gb-gold/40 text-gb-gold mb-4">Legacy</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">Hall of Fame</h1>
+      <p class="text-gray-300 text-lg">Records, rivalries, and the legends of Gridiron Bloodlines.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <!-- Records -->
+    <h2 class="section-title"><span class="text-gb-red">League</span> Records</h2>
+    <div class="divider-red"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {recordCategories.map(cat => (
+        <div class="card">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">{cat.icon}</span>
+            <h3 class="text-white font-bold text-lg font-display uppercase">{cat.title}</h3>
+          </div>
+          <div class="space-y-3">
+            {cat.records.map(rec => (
+              <div class="flex justify-between items-start gap-4 py-2 border-b border-gb-border last:border-0">
+                <div>
+                  <div class="text-gray-300 text-sm">{rec.label}</div>
+                  <div class="text-gray-500 text-xs mt-0.5">{rec.holder === '—' ? 'Record holder TBD' : rec.holder}</div>
+                </div>
+                <div class="text-gb-gold font-bold font-display text-lg shrink-0">
+                  {rec.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Rivalries -->
+    <h2 class="section-title"><span class="text-gb-red">League</span> Rivalries</h2>
+    <div class="divider-red"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+      {rivalries.map((r, i) => (
+        <div class="card hover:border-gb-gold/30 group">
+          <div class="text-gb-gold font-bold text-xs uppercase tracking-widest mb-1 font-display">
+            Rivalry #{i + 1}
+          </div>
+          <h3 class="text-white font-bold text-lg mb-1 font-display uppercase group-hover:text-gb-gold transition-colors">
+            {r.name}
+          </h3>
+          <div class="text-gb-red text-xs font-semibold mb-2 uppercase tracking-wider">{r.teams}</div>
+          <p class="text-gray-400 text-sm leading-relaxed">{r.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Hall of Fame Inductees -->
+    <h2 class="section-title"><span class="text-gb-red">HOF</span> Inductees</h2>
+    <div class="divider-red"></div>
+
+    <div class="card text-center py-16">
+      <div class="text-5xl mb-4">🌟</div>
+      <h3 class="text-white font-bold text-xl mb-2 font-display">No Inductees Yet</h3>
+      <p class="text-gray-400 text-sm max-w-sm mx-auto">
+        Hall of Fame inductees will be honored here after seasons of sustained excellence.
+        Build your dynasty and leave your legacy.
+      </p>
+    </div>
+
+  </section>
+
+</Layout>

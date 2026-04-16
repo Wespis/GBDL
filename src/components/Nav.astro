@@ -1,0 +1,102 @@
+---
+const base = import.meta.env.BASE_URL; // e.g. "/GBDL/"
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: base,                          label: 'Home' },
+  { href: `${base}founding-coaches`,     label: 'Founding Coaches' },
+  { href: `${base}draft-day`,            label: 'Draft Day' },
+  { href: `${base}season-stats`,         label: 'Season Stats' },
+  { href: `${base}bloodline-bowl`,       label: 'Bloodline Bowl' },
+  { href: `${base}hall-of-fame`,         label: 'Hall of Fame' },
+  { href: `${base}sponsors`,             label: 'Sponsors' },
+  { href: `${base}weekly-updates`,       label: 'Weekly Updates' },
+  { href: `${base}gb-tv`,               label: 'GB.tv' },
+];
+
+function isActive(href: string) {
+  if (href === base) return pathname === base || pathname === base.replace(/\/$/, '');
+  return pathname.startsWith(href);
+}
+---
+
+<header class="bg-gb-card border-b border-gb-border sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href={base} class="flex items-center gap-3 shrink-0">
+        <div class="w-10 h-10 bg-gb-red rounded-full flex items-center justify-center font-display font-bold text-white text-base shadow-md">
+          GB
+        </div>
+        <div class="hidden sm:block leading-tight">
+          <div class="text-white font-bold text-base tracking-wide font-display uppercase">Gridiron Bloodlines</div>
+          <div class="text-gb-gold text-[10px] tracking-widest uppercase">Dynasty League</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden xl:flex items-center gap-0.5">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`px-3 py-2 rounded text-sm font-medium transition-colors duration-150 whitespace-nowrap ${
+              isActive(link.href)
+                ? 'text-gb-gold bg-gb-card-hover'
+                : 'text-gray-300 hover:text-white hover:bg-gb-card-hover'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="xl:hidden p-2 rounded text-gray-400 hover:text-white hover:bg-gb-card-hover transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden xl:hidden bg-gb-card border-t border-gb-border">
+    <div class="px-4 py-3 grid grid-cols-2 gap-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`block px-3 py-2 rounded text-sm font-medium transition-colors ${
+            isActive(link.href)
+              ? 'text-gb-gold bg-gb-card-hover'
+              : 'text-gray-300 hover:text-white hover:bg-gb-card-hover'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  btn?.addEventListener('click', () => {
+    const isHidden = menu?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(!isHidden));
+    iconOpen?.classList.toggle('hidden', !isHidden);
+    iconClose?.classList.toggle('hidden', !!isHidden);
+  });
+</script>

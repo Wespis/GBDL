@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+type Report = { week: string; label: string; link?: string };
+type Season = { year: string; regular: Report[]; postseason: Report[] };
+
+// Populate link fields with URLs to reports as they are written
+const seasons: Season[] = [
+  {
+    year: '2026',
+    regular: Array.from({ length: 14 }, (_, i) => ({
+      week: `Week ${i + 1}`,
+      label: `Week ${i + 1} Commissioner Report`,
+      link: undefined,
+    })),
+    postseason: [
+      { week: 'Wildcard',      label: 'Wildcard Round Report',    link: undefined },
+      { week: 'Semifinals',    label: 'Semifinals Report',        link: undefined },
+      { week: 'Bloodline Bowl', label: 'Bloodline Bowl Report',   link: undefined },
+    ],
+  },
+  {
+    year: '2027',
+    regular: Array.from({ length: 14 }, (_, i) => ({
+      week: `Week ${i + 1}`,
+      label: `Week ${i + 1} Commissioner Report`,
+      link: undefined,
+    })),
+    postseason: [
+      { week: 'Wildcard',      label: 'Wildcard Round Report',    link: undefined },
+      { week: 'Semifinals',    label: 'Semifinals Report',        link: undefined },
+      { week: 'Bloodline Bowl', label: 'Bloodline Bowl Report',   link: undefined },
+    ],
+  },
+];
+---
+
+<Layout title="Weekly Updates">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">Season Reports</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">Weekly Updates</h1>
+      <p class="text-gray-300 text-lg">Commissioner reports for every week of every season.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <!-- Season tabs -->
+    <div class="flex gap-3 mb-10 flex-wrap">
+      {seasons.map((s, i) => (
+        <button
+          data-season={s.year}
+          class={`season-tab px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors border ${
+            i === 0
+              ? 'bg-gb-red border-gb-red text-white'
+              : 'bg-gb-card border-gb-border text-gray-400 hover:text-white hover:border-gray-500'
+          }`}
+        >
+          {s.year} Season
+        </button>
+      ))}
+    </div>
+
+    {seasons.map((season, si) => (
+      <div id={`season-${season.year}`} class={`season-content ${si !== 0 ? 'hidden' : ''}`}>
+
+        <!-- Regular Season -->
+        <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+          <span class="text-gb-red">{season.year}</span> Regular Season
+        </h2>
+        <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-10">
+          {season.regular.map(report => (
+            <div class={`rounded-lg border p-4 flex flex-col gap-2 transition-colors ${
+              report.link
+                ? 'border-gb-red/40 bg-gb-red/10 hover:bg-gb-red/20 cursor-pointer'
+                : 'border-gb-border bg-gb-card opacity-60'
+            }`}>
+              <div class="text-xs text-gray-400 uppercase tracking-wider font-medium">{report.week}</div>
+              {report.link ? (
+                <a href={report.link} target="_blank" rel="noopener"
+                   class="text-white text-sm font-semibold hover:text-gb-gold transition-colors">
+                  View Report →
+                </a>
+              ) : (
+                <div class="text-gray-500 text-xs">Coming soon</div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Postseason -->
+        <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+          <span class="text-gb-red">{season.year}</span> Postseason
+        </h2>
+        <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
+          {season.postseason.map(report => (
+            <div class={`rounded-xl border p-5 flex flex-col gap-2 transition-colors ${
+              report.link
+                ? 'border-gb-gold/40 bg-gb-gold/10 hover:bg-gb-gold/20 cursor-pointer'
+                : 'border-gb-border bg-gb-card opacity-60'
+            }`}>
+              <div class="text-xs text-gb-gold uppercase tracking-wider font-medium font-display">{report.week}</div>
+              <div class="text-white text-sm font-semibold">{report.label}</div>
+              {report.link ? (
+                <a href={report.link} target="_blank" rel="noopener"
+                   class="text-gb-gold text-xs font-semibold hover:underline">
+                  View Report →
+                </a>
+              ) : (
+                <div class="text-gray-500 text-xs">Coming soon</div>
+              )}
+            </div>
+          ))}
+        </div>
+
+      </div>
+    ))}
+
+  </section>
+
+</Layout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.season-tab');
+  const contents = document.querySelectorAll<HTMLDivElement>('.season-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const season = tab.dataset.season;
+      tabs.forEach(t => {
+        const active = t.dataset.season === season;
+        t.className = `season-tab px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors border ${
+          active
+            ? 'bg-gb-red border-gb-red text-white'
+            : 'bg-gb-card border-gb-border text-gray-400 hover:text-white hover:border-gray-500'
+        }`;
+      });
+      contents.forEach(c => {
+        c.classList.toggle('hidden', c.id !== `season-${season}`);
+      });
+    });
+  });
+</script>

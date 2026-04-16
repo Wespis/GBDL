@@ -1,0 +1,36 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Gridiron Bloodlines Dynasties — 14-team competitive dynasty fantasy football league.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={`${title} | Gridiron Bloodlines`} />
+    <meta property="og:description" content={description} />
+    <title>{title} | Gridiron Bloodlines</title>
+  </head>
+  <body class="bg-gb-dark text-white min-h-screen flex flex-col font-body antialiased">
+    <Nav />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

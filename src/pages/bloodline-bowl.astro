@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Update with champions after each season
+const champions: { season: string; champion: string; coach: string; opponent: string; score: string }[] = [];
+---
+
+<Layout title="Bloodline Bowl">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-gold/20 border border-gb-gold/40 text-gb-gold mb-4">Championship</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">
+        Bloodline Bowl
+      </h1>
+      <p class="text-gray-300 text-lg">The championship game. One ring. One dynasty.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <!-- Playoff Format -->
+    <h2 class="section-title"><span class="text-gb-red">Playoff</span> Format</h2>
+    <div class="divider-red"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      {[
+        { icon: '6️⃣', title: 'Six Playoff Teams', desc: 'Division champions earn guaranteed playoff spots. Remaining positions are filled by best record and head-to-head tiebreakers.' },
+        { icon: '🗓️', title: 'Playoff Rounds',    desc: 'Three rounds of playoff competition: Wildcard, Semifinals, and the Bloodline Bowl Championship game.' },
+        { icon: '💍', title: 'Championship Ring', desc: 'The Bloodline Bowl champion receives a personalized championship ring engraved for the winning team.' },
+      ].map(item => (
+        <div class="card text-center">
+          <div class="text-4xl mb-3">{item.icon}</div>
+          <h3 class="text-white font-bold text-lg mb-2 font-display uppercase">{item.title}</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Prizes -->
+    <div class="bg-gradient-to-r from-gb-red-deeper to-gb-card border border-gb-red/30 rounded-2xl p-8 mb-16">
+      <h2 class="text-2xl font-bold text-white font-display uppercase mb-6 text-center">
+        <span class="text-gb-gold">Prize</span> Structure
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { place: '1st Place', icon: '🥇', prize: 'Championship Ring + Cash Prize', color: 'text-gb-gold-light' },
+          { place: '2nd Place', icon: '🥈', prize: 'Cash Prize', color: 'text-gray-300' },
+          { place: '3rd Place', icon: '🥉', prize: 'Cash Prize',  color: 'text-amber-600' },
+        ].map(p => (
+          <div class="text-center">
+            <div class="text-5xl mb-2">{p.icon}</div>
+            <div class={`font-bold text-lg font-display ${p.color}`}>{p.place}</div>
+            <div class="text-gray-300 text-sm mt-1">{p.prize}</div>
+          </div>
+        ))}
+      </div>
+      <p class="text-gray-400 text-xs text-center mt-6">
+        Exact cash prize amounts are subject to league vote each season.
+      </p>
+    </div>
+
+    <!-- Season Awards -->
+    <h2 class="section-title"><span class="text-gb-red">Season</span> Awards</h2>
+    <div class="divider-red"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+
+      <div class="card">
+        <div class="text-3xl mb-3">⚔️</div>
+        <h3 class="text-white font-bold text-lg mb-2 font-display uppercase">Offensive MVP</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Awarded to the starter scoring the most fantasy points across QB, RB, WR, and TE/Flex positions throughout the regular season.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="text-3xl mb-3">🛡️</div>
+        <h3 class="text-white font-bold text-lg mb-2 font-display uppercase">Defensive MVP</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Recognizes the top defensive performer across DB, DL, DEF, and IDP Flex positions with the highest scoring output.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="text-3xl mb-3">🦵</div>
+        <h3 class="text-white font-bold text-lg mb-2 font-display uppercase">Special Teams MVP</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Awards the kicker and defense position players who delivered the highest special teams scoring across the season.
+        </p>
+      </div>
+
+      <div class="card border-gb-gold/30 hover:border-gb-gold">
+        <div class="text-3xl mb-3">👑</div>
+        <h3 class="text-white font-bold text-lg mb-2 font-display uppercase">Bloodline MVP</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          The league's highest honor. Voted on by all six playoff teams — awarded to the team the league feels most deserves
+          the MVP for the season, regardless of whether they won the championship.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Champions Table -->
+    <h2 class="section-title"><span class="text-gb-red">Past</span> Champions</h2>
+    <div class="divider-red"></div>
+
+    {champions.length === 0 ? (
+      <div class="card text-center py-16">
+        <div class="text-5xl mb-4">🏆</div>
+        <h3 class="text-white font-bold text-xl mb-2 font-display">No Champions Yet</h3>
+        <p class="text-gray-400 text-sm max-w-sm mx-auto">
+          The first Bloodline Bowl champion will be crowned at the end of the 2026 season. Will it be you?
+        </p>
+      </div>
+    ) : (
+      <div class="overflow-x-auto rounded-xl border border-gb-border">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gb-card-hover text-left">
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Season</th>
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Champion</th>
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Coach</th>
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Opponent</th>
+              <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-right">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {champions.map(row => (
+              <tr class="border-t border-gb-border hover:bg-gb-card-hover/50 transition-colors">
+                <td class="px-4 py-3 text-gb-gold font-bold font-display">{row.season}</td>
+                <td class="px-4 py-3 text-white font-semibold">{row.champion}</td>
+                <td class="px-4 py-3 text-gray-300">{row.coach}</td>
+                <td class="px-4 py-3 text-gray-300">{row.opponent}</td>
+                <td class="px-4 py-3 text-white font-bold text-right">{row.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+  </section>
+
+</Layout>

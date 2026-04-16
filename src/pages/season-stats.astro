@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Populate standings and stats after each season
+const seasons = [
+  { label: '2026 Season', value: '2026' },
+  { label: '2027 Season', value: '2027' },
+];
+
+const standings2026: { rank: number; team: string; coach: string; w: number; l: number; pf: number; pa: number; streak: string }[] = [];
+---
+
+<Layout title="Season Stats">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">Updated End of Season</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">Season Stats</h1>
+      <p class="text-gray-300 text-lg">Standings, records, and performance data across every season.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <!-- Season tabs -->
+    <div class="flex gap-3 mb-10 flex-wrap">
+      {seasons.map((s, i) => (
+        <button
+          data-season={s.value}
+          class={`season-tab px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors border ${
+            i === 0
+              ? 'bg-gb-red border-gb-red text-white'
+              : 'bg-gb-card border-gb-border text-gray-400 hover:text-white hover:border-gray-500'
+          }`}
+        >
+          {s.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- 2026 Stats -->
+    <div id="stats-2026" class="season-content">
+      <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+        <span class="text-gb-red">2026</span> Standings
+      </h2>
+      <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+
+      {standings2026.length === 0 ? (
+        <div class="card text-center py-16 mb-10">
+          <div class="text-5xl mb-4">📊</div>
+          <h3 class="text-white font-bold text-xl mb-2 font-display">Stats Will Be Updated After the Season</h3>
+          <p class="text-gray-400 text-sm max-w-sm mx-auto">
+            Final standings, individual performance data, and records will be posted here at the end of the 2026 season.
+          </p>
+        </div>
+      ) : (
+        <div class="overflow-x-auto rounded-xl border border-gb-border mb-12">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gb-card-hover text-left">
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Rank</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Team</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider">Coach</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-center">W</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-center">L</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-right">PF</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-right">PA</th>
+                <th class="px-4 py-3 text-gb-gold font-semibold uppercase text-xs tracking-wider text-center">Streak</th>
+              </tr>
+            </thead>
+            <tbody>
+              {standings2026.map(row => (
+                <tr class="border-t border-gb-border hover:bg-gb-card-hover/50 transition-colors">
+                  <td class="px-4 py-3 text-gb-gold font-bold font-display">{row.rank}</td>
+                  <td class="px-4 py-3 text-white font-semibold">{row.team}</td>
+                  <td class="px-4 py-3 text-gray-300">{row.coach}</td>
+                  <td class="px-4 py-3 text-green-400 font-bold text-center">{row.w}</td>
+                  <td class="px-4 py-3 text-gb-red font-bold text-center">{row.l}</td>
+                  <td class="px-4 py-3 text-gray-300 text-right">{row.pf.toFixed(2)}</td>
+                  <td class="px-4 py-3 text-gray-300 text-right">{row.pa.toFixed(2)}</td>
+                  <td class="px-4 py-3 text-center">
+                    <span class={`badge text-[10px] ${row.streak.startsWith('W') ? 'bg-green-900/40 border border-green-700/40 text-green-400' : 'bg-red-900/40 border border-red-700/40 text-red-400'}`}>
+                      {row.streak}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+
+    <!-- 2027 Stats (hidden by default) -->
+    <div id="stats-2027" class="season-content hidden">
+      <div class="card text-center py-16">
+        <div class="text-5xl mb-4">🗓️</div>
+        <h3 class="text-white font-bold text-xl mb-2 font-display">2027 Season Hasn't Started Yet</h3>
+        <p class="text-gray-400 text-sm max-w-sm mx-auto">
+          Check back once the 2027 season begins for standings and stats.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+</Layout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.season-tab');
+  const contents = document.querySelectorAll<HTMLDivElement>('.season-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const season = tab.dataset.season;
+      tabs.forEach(t => {
+        const active = t.dataset.season === season;
+        t.className = `season-tab px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors border ${
+          active
+            ? 'bg-gb-red border-gb-red text-white'
+            : 'bg-gb-card border-gb-border text-gray-400 hover:text-white hover:border-gray-500'
+        }`;
+      });
+      contents.forEach(c => {
+        c.classList.toggle('hidden', c.id !== `stats-${season}`);
+      });
+    });
+  });
+</script>

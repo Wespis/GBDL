@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
+
+const sponsors = [
+  {
+    name: "Bubba's Taphouse",
+    tier: 'Primary Sponsor',
+    description: "Gridiron Bloodlines' proud primary sponsor. Bubba's Taphouse is the home of great drinks and great times — the perfect place to watch games and celebrate dynasty wins.",
+    link: 'https://instagram.com',
+    linkLabel: 'Follow on Instagram',
+    icon: '🍺',
+    color: 'border-gb-gold/40 hover:border-gb-gold',
+  },
+  {
+    name: 'Texas A&M Alumni',
+    tier: 'Community Sponsor',
+    description: "Proud home to multiple Texas A&M alumni coaches in the league. Gig 'Em! The Aggie network runs deep in Gridiron Bloodlines.",
+    link: `${base}founding-coaches`,
+    linkLabel: 'Meet the Alumni Coaches',
+    icon: '🎓',
+    color: 'border-gb-border hover:border-gb-red',
+  },
+  {
+    name: 'GB.tv',
+    tier: 'Media Partner',
+    description: 'The official media arm of Gridiron Bloodlines. Season trailers, weekly updates, league highlights, and more. Subscribe to the channel and stay in the loop.',
+    link: `${base}gb-tv`,
+    linkLabel: 'Watch GB.tv',
+    icon: '📺',
+    color: 'border-gb-border hover:border-gb-red',
+  },
+];
+---
+
+<Layout title="Sponsors">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">Partners</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">Sponsors</h1>
+      <p class="text-gray-300 text-lg">The partners who support Gridiron Bloodlines Dynasties.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <h2 class="section-title"><span class="text-gb-red">Our</span> Partners</h2>
+    <div class="divider-red"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      {sponsors.map(s => (
+        <div class={`card flex flex-col border-2 ${s.color} transition-colors duration-200`}>
+          <div class="text-5xl mb-4">{s.icon}</div>
+          <div class="badge bg-gb-red/20 border border-gb-red/30 text-gb-red text-[10px] mb-3 self-start">
+            {s.tier}
+          </div>
+          <h3 class="text-white font-bold text-xl mb-3 font-display uppercase">{s.name}</h3>
+          <p class="text-gray-300 text-sm leading-relaxed flex-1 mb-5">{s.description}</p>
+          <a
+            href={s.link}
+            target={s.link.startsWith('http') ? '_blank' : undefined}
+            rel={s.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="inline-flex items-center gap-2 text-gb-gold hover:underline text-sm font-semibold"
+          >
+            {s.linkLabel} →
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Become a Sponsor CTA -->
+    <div class="bg-gradient-to-r from-gb-card to-gb-card-hover border border-gb-border rounded-2xl p-10 text-center">
+      <div class="text-4xl mb-4">🤝</div>
+      <h2 class="text-2xl font-bold text-white font-display uppercase mb-3">Become a Sponsor</h2>
+      <p class="text-gray-300 text-sm max-w-lg mx-auto mb-6 leading-relaxed">
+        Interested in partnering with Gridiron Bloodlines Dynasties?
+        Reach out to either commissioner to discuss sponsorship opportunities.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:christopherhunt57@gmail.com" class="btn-primary">
+          Contact Chris Hunt
+        </a>
+        <a href="mailto:walkergirard7@gmail.com" class="btn-secondary">
+          Contact Walker Girard
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</Layout>

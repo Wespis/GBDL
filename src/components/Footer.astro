@@ -1,0 +1,96 @@
+---
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-gb-card border-t border-gb-border mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-gb-red rounded-full flex items-center justify-center font-display font-bold text-white text-base">GB</div>
+          <div>
+            <div class="text-white font-bold font-display uppercase tracking-wide">Gridiron Bloodlines</div>
+            <div class="text-gb-gold text-[10px] tracking-widest uppercase">Dynasty League</div>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          14-team competitive dynasty fantasy football league. Two 7-team conferences. Six playoff spots. One championship ring.
+        </p>
+        <div class="flex gap-3 mt-4">
+          <a href="https://sleeper.com" target="_blank" rel="noopener"
+             class="text-xs px-3 py-1.5 bg-green-900/50 hover:bg-green-800 border border-green-800 text-green-400 rounded-md transition-colors font-medium">
+            Sleeper App
+          </a>
+          <a href="https://discord.com" target="_blank" rel="noopener"
+             class="text-xs px-3 py-1.5 bg-indigo-900/50 hover:bg-indigo-800 border border-indigo-800 text-indigo-400 rounded-md transition-colors font-medium">
+            Discord
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          {[
+            [base,                          'Home'],
+            [`${base}founding-coaches`,     'Founding Coaches & Teams'],
+            [`${base}bloodline-bowl`,       'Bloodline Bowl'],
+            [`${base}hall-of-fame`,         'Hall of Fame'],
+            [`${base}season-stats`,         'Season Stats'],
+            [`${base}weekly-updates`,       'Weekly Updates'],
+            [`${base}gb-tv`,               'GB.tv'],
+            [`${base}sponsors`,             'Sponsors'],
+          ].map(([href, label]) => (
+            <li>
+              <a href={href} class="text-gray-400 hover:text-gb-gold transition-colors">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Commissioners -->
+      <div>
+        <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Commissioners</h3>
+        <div class="space-y-5 text-sm">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 bg-gb-red-dark rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 font-display">
+              CH
+            </div>
+            <div>
+              <div class="text-white font-semibold">Chris Hunt</div>
+              <div class="text-gray-400 text-xs mt-0.5">(210)-823-8224</div>
+              <div class="text-gray-400 text-xs">Discord: chrish57</div>
+              <a href="mailto:christopherhunt57@gmail.com" class="text-gb-gold hover:underline text-xs">
+                christopherhunt57@gmail.com
+              </a>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 bg-gb-red-dark rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 font-display">
+              WG
+            </div>
+            <div>
+              <div class="text-white font-semibold">Walker Girard</div>
+              <div class="text-gray-400 text-xs mt-0.5">(832)-331-2153</div>
+              <div class="text-gray-400 text-xs">Discord: cybornee</div>
+              <a href="mailto:walkergirard7@gmail.com" class="text-gb-gold hover:underline text-xs">
+                walkergirard7@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gb-border flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
+      <span>&copy; {year} Gridiron Bloodlines Dynasties. All rights reserved.</span>
+      <span class="text-gray-600">Built with Astro &amp; Tailwind CSS</span>
+    </div>
+  </div>
+</footer>

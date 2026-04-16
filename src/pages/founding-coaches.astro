@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Update this array with actual team data as coaches register
+const teams = [
+  { id: 1,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'North', status: 'pending' },
+  { id: 2,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'North', status: 'pending' },
+  { id: 3,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'South', status: 'pending' },
+  { id: 4,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'South', status: 'pending' },
+  { id: 5,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'East',  status: 'pending' },
+  { id: 6,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'East',  status: 'pending' },
+  { id: 7,  name: 'TBD', coach: 'TBD', conference: 'AFC', division: 'West',  status: 'pending' },
+  { id: 8,  name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'North', status: 'pending' },
+  { id: 9,  name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'North', status: 'pending' },
+  { id: 10, name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'South', status: 'pending' },
+  { id: 11, name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'South', status: 'pending' },
+  { id: 12, name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'East',  status: 'pending' },
+  { id: 13, name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'East',  status: 'pending' },
+  { id: 14, name: 'TBD', coach: 'TBD', conference: 'NFC', division: 'West',  status: 'pending' },
+];
+
+const afcTeams = teams.filter(t => t.conference === 'AFC');
+const nfcTeams = teams.filter(t => t.conference === 'NFC');
+---
+
+<Layout title="Founding Coaches & Teams">
+
+  <section class="page-hero">
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-block badge bg-gb-red/20 border border-gb-red/40 text-gb-red mb-4">Season 1 Roster</div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white font-display uppercase mb-3">
+        Founding Coaches
+      </h1>
+      <p class="text-gray-300 text-lg">The 14 coaches who built this dynasty from the ground up.</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+
+    <!-- Notice if data pending -->
+    <div class="bg-gb-gold/10 border border-gb-gold/30 rounded-xl p-5 mb-12 flex items-start gap-3">
+      <div class="text-gb-gold text-xl shrink-0">ℹ️</div>
+      <div>
+        <div class="text-white font-semibold">Team data will be updated as coaches register</div>
+        <div class="text-gray-400 text-sm mt-1">
+          Each team must submit their team name and logo before the draft. Contact a commissioner for branding assistance.
+        </div>
+      </div>
+    </div>
+
+    <!-- AFC Conference -->
+    <div class="mb-14">
+      <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+        <span class="text-gb-red">AFC</span> Conference
+      </h2>
+      <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {afcTeams.map(team => (
+          <div class="card flex flex-col items-center text-center group">
+            <!-- Logo placeholder -->
+            <div class="w-20 h-20 rounded-full bg-gb-card-hover border-2 border-gb-border group-hover:border-gb-red flex items-center justify-center mb-4 transition-colors duration-200">
+              <span class="text-gray-600 text-3xl font-bold font-display">{team.id}</span>
+            </div>
+            <div class="badge bg-gb-red/20 border border-gb-red/30 text-gb-red text-[10px] mb-2">
+              AFC · {team.division}
+            </div>
+            <h3 class="text-white font-bold text-base font-display uppercase">
+              {team.name === 'TBD' ? 'Team Name TBD' : team.name}
+            </h3>
+            <p class="text-gray-400 text-sm mt-1">
+              {team.coach === 'TBD' ? 'Coach TBD' : `Coach: ${team.coach}`}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- NFC Conference -->
+    <div>
+      <h2 class="text-2xl font-bold text-white font-display uppercase mb-1">
+        <span class="text-gb-red">NFC</span> Conference
+      </h2>
+      <div class="h-0.5 w-full bg-gb-border mb-6"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {nfcTeams.map(team => (
+          <div class="card flex flex-col items-center text-center group">
+            <div class="w-20 h-20 rounded-full bg-gb-card-hover border-2 border-gb-border group-hover:border-gb-red flex items-center justify-center mb-4 transition-colors duration-200">
+              <span class="text-gray-600 text-3xl font-bold font-display">{team.id}</span>
+            </div>
+            <div class="badge bg-blue-900/40 border border-blue-700/40 text-blue-400 text-[10px] mb-2">
+              NFC · {team.division}
+            </div>
+            <h3 class="text-white font-bold text-base font-display uppercase">
+              {team.name === 'TBD' ? 'Team Name TBD' : team.name}
+            </h3>
+            <p class="text-gray-400 text-sm mt-1">
+              {team.coach === 'TBD' ? 'Coach TBD' : `Coach: ${team.coach}`}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </section>
+
+</Layout>
