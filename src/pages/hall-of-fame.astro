@@ -2,19 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 
 const rivalries = [
-  { name: 'Clash of the Commish', teams: 'Walker vs. Chris',           desc: 'The commissioners go head-to-head. Commissioner pride on the line every matchup.' },
-  { name: 'Westwood Shootout',    teams: 'TBD vs. TBD',                desc: 'A high-scoring clash between two offensive-minded dynasties.' },
-  { name: 'Unc Bowl',             teams: 'TBD vs. TBD',                desc: 'Family ties meet dynasty competition in this storied rivalry.' },
-  { name: 'Rage Bait Rivalry',    teams: 'TBD vs. TBD',                desc: 'Guaranteed to spark debate in the Discord every time these two meet.' },
-  { name: 'Generations Bowl',     teams: 'TBD vs. TBD',                desc: 'A clash of contrasting dynasty-building philosophies.' },
-  { name: 'Saguaro Showdown',     teams: 'TBD vs. TBD',                desc: 'A rivalry born in the desert. Sun and pride on the line.' },
-  { name: 'H-Town Throwdown',     teams: 'TBD vs. TBD',                desc: 'Houston-based coaches battle for city supremacy.' },
+  { name: 'Clash of the Commish', teams: 'Walker vs. Chris',    desc: 'The commissioners go head-to-head. Commissioner pride on the line every matchup.' },
+  { name: 'Westwood Shootout',    teams: 'Parker vs. August',   desc: 'A high-scoring clash between two offensive-minded dynasties.' },
+  { name: 'Unc Bowl',             teams: 'Webber vs. Matt',     desc: 'Family ties meet dynasty competition in this storied rivalry.' },
+  { name: 'Rage Bait Rivalry',    teams: 'Jackson vs. Kobe',    desc: 'Guaranteed to spark debate in the Discord every time these two meet.' },
+  { name: 'Generations Bowl',     teams: 'Austin vs. Sam',      desc: 'A clash of contrasting dynasty-building philosophies.' },
+  { name: 'Saguaro Showdown',     teams: 'Luke vs. Mac',        desc: 'A rivalry born in the desert. Sun and pride on the line.' },
+  { name: 'H-Town Throwdown',     teams: 'Trevor vs. Ethan',    desc: 'Houston-based coaches battle for city supremacy.' },
 ];
 
 const recordCategories = [
   {
     title: 'Offensive Records',
-    icon: '⚔️',
     records: [
       { label: 'Most Offensive Points In A Game (Team)',   holder: '—', value: '—' },
       { label: 'Most Offensive Points In A Season (Team)', holder: '—', value: '—' },
@@ -26,7 +25,6 @@ const recordCategories = [
   },
   {
     title: 'Defensive Records',
-    icon: '🛡️',
     records: [
       { label: 'Most Defensive Points In A Game (Team)',   holder: '—', value: '—' },
       { label: 'Most Defensive Points In A Season (Team)', holder: '—', value: '—' },
@@ -35,23 +33,24 @@ const recordCategories = [
   },
   {
     title: 'Special Teams Records',
-    icon: '🦵',
     records: [
-      { label: 'Best Kicker Game',                             holder: '—', value: '—' },
-      { label: 'Best Kicker Season',                           holder: '—', value: '—' },
-      { label: 'Most Consecutive Weeks On A Team (Kicker)',    holder: '—', value: '—' },
+      { label: 'Best Kicker Game',                          holder: '—', value: '—' },
+      { label: 'Best Kicker Season',                        holder: '—', value: '—' },
+      { label: 'Most Consecutive Weeks On A Team (Kicker)', holder: '—', value: '—' },
     ],
   },
   {
     title: 'Coaching Records',
-    icon: '📋',
     records: [
-      { label: 'Most Points In A Week (Coach)',         holder: '—', value: '—' },
-      { label: 'Most Points In A Season (Coach)',       holder: '—', value: '—' },
-      { label: 'Most Bloodline Bowl Championships',     holder: '—', value: '—' },
-      { label: 'Most Regular Season Wins',              holder: '—', value: '—' },
-      { label: 'Most Post-Season Wins',                 holder: '—', value: '—' },
-      { label: 'Most MVP Awards',                       holder: '—', value: '—' },
+      { label: 'Most Points In A Week (Coach)',          holder: '—', value: '—' },
+      { label: 'Most Points In A Season (Coach)',        holder: '—', value: '—' },
+      { label: 'Most Games Won In A Season (Coach)',     holder: '—', value: '—' },
+      { label: 'Most Games Lost In A Season (Coach)',    holder: '—', value: '—' },
+      { label: 'Most Points In Postseason (Coach)',      holder: '—', value: '—' },
+      { label: 'Most Bloodline Bowl Championships',      holder: '—', value: '—' },
+      { label: 'Most Regular Season Wins',               holder: '—', value: '—' },
+      { label: 'Most Post-Season Wins',                  holder: '—', value: '—' },
+      { label: 'Most MVP Awards',                        holder: '—', value: '—' },
     ],
   },
 ];
@@ -70,16 +69,17 @@ const recordCategories = [
   <section class="page-content">
 
     <!-- Records -->
-    <h2 class="section-title"><span class="text-gb-red">League</span> Records</h2>
-    <div class="divider-red"></div>
+    <h2 class="section-title">League Records</h2>
+    <p class="text-gb-muted text-xs -mt-4 mb-8 leading-relaxed">
+      All records are reviewed and finalized at the end of each season after the Bloodline Bowl champion is determined.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
       {recordCategories.map(cat => (
         <div class="card">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-2xl">{cat.icon}</span>
-            <h3 class="text-white font-bold text-lg font-display uppercase">{cat.title}</h3>
-          </div>
+          <h3 class="text-white font-bold text-lg font-display uppercase mb-4 pb-3 border-b border-gb-border">
+            {cat.title}
+          </h3>
           <div class="space-y-3">
             {cat.records.map(rec => (
               <div class="flex justify-between items-start gap-4 py-2 border-b border-gb-border last:border-0">
@@ -98,8 +98,7 @@ const recordCategories = [
     </div>
 
     <!-- Rivalries -->
-    <h2 class="section-title"><span class="text-gb-red">League</span> Rivalries</h2>
-    <div class="divider-red"></div>
+    <h2 class="section-title">League Rivalries</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
       {rivalries.map((r, i) => (
@@ -117,11 +116,9 @@ const recordCategories = [
     </div>
 
     <!-- Hall of Fame Inductees -->
-    <h2 class="section-title"><span class="text-gb-red">HOF</span> Inductees</h2>
-    <div class="divider-red"></div>
+    <h2 class="section-title">HOF Inductees</h2>
 
     <div class="card text-center py-16">
-      <div class="text-5xl mb-4">🌟</div>
       <h3 class="text-white font-bold text-xl mb-2 font-display">No Inductees Yet</h3>
       <p class="text-gray-400 text-sm max-w-sm mx-auto">
         Hall of Fame inductees will be honored here after seasons of sustained excellence.
